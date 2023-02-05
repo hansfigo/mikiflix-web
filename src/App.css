@@ -36,3 +36,49 @@
     transform: rotate(360deg);
   }
 }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.anime-card-container{
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+
+.anime-card-container -webkit-scrollbar {
+  display: block;
+  }
+.anime-card {
+  width: 300;
+  height: 400px;
+  margin: 20px;
+  display: inline-block;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.anime-card img {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.anime-card h2 {
+  font-size: 22px;
+  padding: 10px;
+}
+
