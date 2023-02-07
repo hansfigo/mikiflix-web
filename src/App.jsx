@@ -4,7 +4,6 @@ import AnimeCard from './card';
 
 function App() {
   const [data, setData] = useState([]);
-  const recentRelase = [];
 
   useEffect(() => {
     async function fetchData() {
@@ -22,9 +21,12 @@ function App() {
           <div className=' flex justify-start min-w-full'>
             <h1 className='font-medium text-2xl'>Recent Relase</h1>
           </div>
-          <div className='py-6 overflow-x-scroll justify-start max-h-max bg-slate-200 flex'>
-            {data.map(anime => (
-              anime.animeTitle.includes('(Dub)') ? <p></p> : <AnimeCard key={anime.id}
+          <div className='my-6 overflow-x-scroll rounded-md justify-start max-h-max bg-slate-200 flex'>
+            {data.map((anime, index)=> (
+              console.log(anime.id),
+              anime.animeTitle.includes('(Dub)') ? <p></p> : <AnimeCard key={index}
+                index={index}
+                animeId={anime.animeId}
                 image={anime.animeImg}
                 title={anime.animeTitle} />
             ))}
