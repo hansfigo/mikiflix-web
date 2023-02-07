@@ -5,28 +5,25 @@ const AnimeCard = (props) => {
     const { image, title } = props;
 
     return (
-        <div className='bg-white mx-4 flex flex-col text-gray-700 w-44 min-h-[8rem]h-6 overflow-hidden shadow-lg rounded-lg'>
-            <img className='' src={image} alt='ANIME' />
-            <div className='px-4 pt-3 text-slate-800'>
-                {title}
-            </div>
-            <div className='px-4 pt-2 text-[10px] text-slate-400 break-words h-20 text-ellipsis overflow-y-scroll overflow-hidden  w-40 '>
-                <p className=''>// If you want to start measuring performance in your app, pass a function
-                    // to log results (for example: reportWebVitals(console.log))
-                    // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals</p>
-            </div>
-            <div className='px-4 py-3 flex break-words bg-blue-200 w-[120px]'>
-                <div className='bg-slate-100 hover:bg-red-400 hover:text-white shadow-sm ease-out duration-150 px-2 py-1 text-xs rounded-full'>
-                    <p>Fantasy</p>
-                </div>
-                <div className='bg-slate-100 shadow-sm py-1 px-1 text-xs rounded-full'>
-                    <p>Action</p>
-                </div>
-                <div className='bg-slate-100 shadow-sm py-1 px-1 text-xs rounded-full'>
-                    <p>Advanture</p>
-                </div>
-            </div>
+        <div class="min-h-[8rem] overflow-hidden mr-8 max-w-[160px] min-w-[160px] w-80 rounded-lg bg-white text-gray-700 shadow-lg">
+        <img class='' src={image} alt='ANIME' />
+        <div class="max-h-16 overflow-hidden text-ellipsis px-4 pt-3 text-slate-800">{title}</div>
+        {/* <!-- <div class="h-20 w-40 overflow-hidden overflow-y-scroll text-ellipsis break-words px-4 pt-2 text-[10px] text-slate-400">
+          <p class="">// If you want to start measuring performance in your app, pass a function // to log results (for example: reportWebVitals(console.log)) // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals</p>
+        </div> --> */}
+        <div class="flex w-full flex-wrap px-4 py-3">
+          <div class="rounded-full bg-slate-100 px-2 py-1 text-xs shadow-sm duration-300 ease-out hover:bg-red-400 hover:text-white">
+            <p>Fantasy</p>
+          </div>
+          <div class="mx-1 rounded-full bg-slate-100 p-1 text-xs shadow-sm duration-300 ease-out hover:bg-red-400 hover:text-white">
+            <p>Action</p>
+          </div>
+          <div class="mt-2 rounded-full bg-slate-100 p-1 text-xs shadow-sm duration-300 ease-out hover:bg-red-400 hover:text-white">
+            <p>Advanture</p>
+          </div>
         </div>
+      </div>
+      
         // <div className=' rounded w-56 flex flex-col items-center mx-2 h-96 overflow-hidden shadow-lg max-w-xs box-border'>
         //     <div className='flex box-border '>
         //         <img src={image} className='h-72' />
