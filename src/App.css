@@ -74,15 +74,5 @@ html, body {
   border-radius: 10px;
 }
 
-.anime-card img {
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
 
-.anime-card h2 {
-  font-size: 22px;
-  padding: 10px;
-}
 

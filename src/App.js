@@ -19,18 +19,15 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Popular Anime</h1>
-        <div className='container'>
-          <div className='anime-card-container'>
+      <header className="bg-gray-800 min-h-screen text-white flex flex-col justify-center items-center">
+        <h1 className='font-semibold text-4xl'>Popular Anime</h1>
+          <div className='flex justify-between flex-nowrap overflow-x-scroll mt-8'>
             {data.map(anime => (
              anime.animeTitle.includes('(Dub)') ? <p></p> : <AnimeCard key={anime.id}
              image={anime.animeImg}
              title={anime.animeTitle} />
             ))}
-          </div>
         </div>
-
       </header>
     </div>
   );
