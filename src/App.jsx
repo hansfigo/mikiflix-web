@@ -23,7 +23,6 @@ function App() {
           </div>
           <div className='my-6 overflow-x-scroll rounded-md justify-start max-h-max bg-slate-200 flex'>
             {data.map((anime, index)=> (
-              console.log(anime.id),
               anime.animeTitle.includes('(Dub)') ? <p></p> : <AnimeCard key={index}
                 index={index}
                 animeId={anime.animeId}
