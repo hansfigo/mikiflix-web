@@ -31,7 +31,7 @@ function App() {
           <div className=' flex justify-start min-w-full'>
             <h1 className='font-medium text-2xl'>Recent Relase</h1>
           </div>
-          <div className='my-6 overflow-x-scroll rounded-md justify-start max-h-max bg-slate-200 flex'>
+          <div className='anime-card-container my-6 overflow-x-scroll rounded-md justify-start max-h-max bg-slate-200 flex'>
             {data.map((anime, index)=> (
               anime.animeTitle.includes('(Dub)') ? <p></p> : <AnimeCard key={index}
                 index={index}
@@ -43,7 +43,7 @@ function App() {
           <div className=' flex justify-start min-w-full'>
             <h1 className='font-medium text-2xl'>Popular Anime</h1>
           </div>
-          <div className='my-6 overflow-x-scroll rounded-md justify-start max-h-max bg-slate-200 flex'>
+          <div className='anime-card-container my-6 overflow-x-scroll rounded-md justify-start max-h-max bg-slate-200 flex'>
             {popular.map((anime, index)=> (
               anime.animeTitle.includes('(Dub)') ? <p></p> : <AnimeCard key={index}
                 index={index}
