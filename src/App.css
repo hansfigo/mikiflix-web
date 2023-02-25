@@ -48,14 +48,6 @@ html, body {
   margin: 0 auto;
 }
 
-
-/* .anime-card-container{
-  -webkit-overflow-scrolling: touch;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-} */
-
 .anime-card-container{
   -webkit-overflow-scrolling: touch;
 }
