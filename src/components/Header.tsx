@@ -1,15 +1,22 @@
 import '../App.css';
-import { Text, Link, IconButton, Input, InputGroup, InputLeftElement, Modal, ModalContent, ModalOverlay, useDisclosure, Box, Button, Flex, Heading, Icon, Avatar } from "@chakra-ui/react";
+import { Text, Link, IconButton, Input, InputGroup, InputLeftElement, Modal, ModalContent, ModalOverlay, useDisclosure, Box, Button, Flex, Heading, Icon, Avatar, useToast } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import Logo from '../../public/logo.png'
 import { ImGithub, ImLinkedin, ImInstagram } from 'react-icons/im'
 import { FaTools } from "react-icons/fa";
+import { AiOutlineSearch } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
 import DarkModeToggle from './ThemeSwitch';
-import avatar from '../../public/figomager.png'
+import { Link as RLink } from 'react-router-dom'
+import avatar from '/figomager.png'
+import { useRef } from 'react';
 
 
 function MyHeader() {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const toast = useToast()
+    const toastIdRef = useRef<number | undefined>()
+
 
     function SearchBar() {
         return (
@@ -31,15 +38,23 @@ function MyHeader() {
 
     function ConstructionBox() {
         return (
-            <Box p={8} borderRadius="md">
-                <Flex alignItems="center" mb={4}>
-                    <Icon as={FaTools} fontSize="2xl" mr={2} />
-                    <Heading size="md">Feature Under Construction</Heading>
+            <Box p={{ base: 8, md: 8 }} borderRadius="md">
+                <Flex flexDirection={'column'} gap={6}>
+                    <Box>
+                        <Flex alignItems="center" mb={4}>
+                            <Icon as={FaTools} fontSize="2xl" mr={2} />
+                            <Heading size={{ base: 'md', md: 'md' }}>Seacrh Feature Under Construction</Heading>
+                        </Flex>
+                        <Text fontSize="lg">
+                            We are currently working hard to bring you this search feature. Stay tuned for
+                            updates!
+                        </Text>
+                    </Box>
+                    <Button onClick={onClose} >
+                        Got It
+                    </Button>
                 </Flex>
-                <Text fontSize="lg">
-                    We are currently working hard to bring you this feature. Stay tuned for
-                    updates!
-                </Text>
+
             </Box>
         );
     };
@@ -61,18 +76,29 @@ function MyHeader() {
 
     function MyAvatar() {
         return (
-            <Avatar src={avatar} size="lg" name="Figma" />
+            <RLink to={'/'}>
+                <Avatar src={avatar} size={{ base: 'md', md: 'lg' }} name="Figma" />
+            </RLink>
         );
     }
+
+
+
 
     return (
         <Flex
             shadow={'md'}
-            bg="whiteAlpha.800"
-            _dark={{ bg: 'blackAlpha.600' }}
-            backdropFilter="blur(10px)"
+            bg="rgba(255, 255, 255, 0.8)" /* semi-transparent background color */
+            backdropFilter="blur(10px)" /* for Chrome */
+            _dark={{ bg: 'rgba(0, 0, 0, 0.6)' }}
             pos="fixed"
             zIndex={10}
+            sx={{
+                "@-moz-document url-prefix()": {
+                    backgroundColor: "rgba(255, 255, 255, 0.8)",
+                    "-moz-backdrop-filter": "blur(10px)",
+                },
+            }}
             w="100%"
             justifyContent="center"
             alignItems="center"
@@ -93,8 +119,8 @@ function MyHeader() {
                     <Flex alignItems={'center'}>
                         <MyAvatar />
                         <Heading
-                            display={['none', 'none', 'flex', 'flex']}
-                            fontSize={['4xl', '4xl', '4xl', '4xl', '6xl']}
+                            display={{ base: 'flex', md: 'flex', lg: 'flex' }}
+                            fontSize={{ base: '3xl', md: '4xl', lg: '6xl' }}
                             bgGradient="linear(to-l, #7928CA, #FF0080)"
                             bgClip="text"
                             fontWeight={'semibold'}
@@ -104,40 +130,50 @@ function MyHeader() {
                     </Flex>
 
                 </Box>
-                <Box flexGrow="1" display={['none', 'none', 'flex', 'flex']}>
-                        <SearchBar />
+                <Box flexGrow="1" display={{ base: 'none', md: 'flex', lg: 'flex' }}>
+                    <SearchBar />
                 </Box>
                 <Box flexGrow="1">
-                    <Flex justifyContent="end" pl={'4'} gap="2" display={['flex', 'flex', 'flex', 'none']}>
+                    <Flex alignItems={'center'} justifyContent="end" pl={'4'} gap="2" display={{ base: 'flex', md: 'none', lg: 'none' }}>
+                        <IconButton onClick={onOpen} aria-label={'Search'}>
+                            <AiOutlineSearch />
+                        </IconButton>
+                        <IconButton aria-label={'Hamburger MEnu'}>
+                            <GiHamburgerMenu />
+                        </IconButton>
                         <DarkModeToggle />
                     </Flex>
-                    <Flex display={['none', 'none', 'none', 'flex']} justifyContent="end" alignItems={'center'} gap="2">
-                        <Button>Home</Button>
-                        <Button>Genre</Button>
-                        <Link href='https://github.com/hansfigo' isExternal>
-                            <IconButton
-                                colorScheme="gray"
-                                aria-label="Call Sage"
-                                fontSize="24px"
-                                icon={<ImGithub />}
-                            />
-                        </Link>
-                        <Link href='https://linkedin.com/in/claudio-hans-figo-bbb872203/' isExternal>
-                            <IconButton
-                                colorScheme="gray"
-                                aria-label="Call Sage"
-                                fontSize="24px"
-                                icon={<ImLinkedin />}
-                            />
-                        </Link>
-                        <Link href='https://www.instagram.com/hans.figo/' isExternal>
-                            <IconButton
-                                colorScheme="gray"
-                                aria-label="Call Sage"
-                                fontSize="24px"
-                                icon={<ImInstagram />}
-                            />
-                        </Link>
+                    <Flex display={{ base: 'none', md: 'flex', lg: 'flex' }} justifyContent="end" alignItems={'center'} gap="2">
+                        <Flex display={{ base: 'none', md: 'none', lg: 'flex' }} gap={2}>
+                            <Button>Home</Button>
+                            <Button onClick={() => toast({ status : 'warning', title: 'Genre Page Under Construction !!',  description: 'We are currently working hard to bring you this page. Stay tune' , duration: 2500,})}>Genre</Button>
+                        </Flex>
+                        <Flex display={{ base: 'none', md: 'flex', lg: 'flex' }} gap={2}>
+                            <Link href='https://github.com/hansfigo' isExternal>
+                                <IconButton
+                                    colorScheme="gray"
+                                    aria-label="Call Sage"
+                                    fontSize="24px"
+                                    icon={<ImGithub />}
+                                />
+                            </Link>
+                            <Link href='https://linkedin.com/in/claudio-hans-figo-bbb872203/' isExternal>
+                                <IconButton
+                                    colorScheme="gray"
+                                    aria-label="Call Sage"
+                                    fontSize="24px"
+                                    icon={<ImLinkedin />}
+                                />
+                            </Link>
+                            <Link href='https://www.instagram.com/hans.figo/' isExternal>
+                                <IconButton
+                                    colorScheme="gray"
+                                    aria-label="Call Sage"
+                                    fontSize="24px"
+                                    icon={<ImInstagram />}
+                                />
+                            </Link>
+                        </Flex>
                         <DarkModeToggle />
                     </Flex>
                 </Box>

@@ -17,9 +17,9 @@ function DarkModeToggle() {
     const toggleBg = useColorModeValue('gray.200', 'gray.700');
 
     return (
-        <Tooltip label={toggleLabel}  placement='right-end' closeOnClick={false}>
+        <Tooltip   placement='right-end' closeOnClick={false}>
             <Switch
-                size="lg"
+                size={{base : 'lg', md:'lg'}}
                 isChecked={isDark}
                 onChange={toggleColorMode}
                 colorScheme="purple"

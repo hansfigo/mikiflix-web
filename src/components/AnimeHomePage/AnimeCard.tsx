@@ -35,10 +35,9 @@ const AnimeCard = ({
                 shadow={"none"}
                 rounded={"2xl"}
                 p={0}
-                w='280px'
-                h='500px'
-                mx="auto"
-            >
+                minW={{base:'140px', lg : '220px'}}
+                _dark = {{bg : 'gray-700'}}
+            >   
                 <CardBody p={0}>
                     <Box>
                         <AspectRatio position={"relative"} ratio={2 / 3}>
@@ -52,20 +51,19 @@ const AnimeCard = ({
                             position="absolute"
                             top="0"
                             left="0"
-                            px="4"
-                            py={2}
-                            bg="blue.300"
+                            p={{base : '1.5', md : '4'}}
+                            bgGradient="linear(to-l, #BE72ED, #72A9F2)"
                             roundedTopLeft={"xl"}
                             roundedBottomRight={"xl"}
                         >
-                            <Text textColor={"white"} fontSize={"xl"} fontWeight={"bold"}>
+                            <Text textColor={"white"} fontSize={["10px"]} fontWeight={"bold"}>
                                 Episode {episodeNum}
                             </Text>
                         </Box>
                     </Box>
 
                     <Stack mt="4">
-                        <Heading noOfLines={2} fontWeight={"semibold"} size="md">
+                        <Heading noOfLines={2} fontWeight={"semibold"} size={["10px"]}>
                             {title}
                         </Heading>
                     </Stack>

@@ -9,10 +9,10 @@ import MyHeader from './components/Header';
 function App() {
 
   return (
-    <Container pos={'relative'} maxW={['', '', '1740px']}>
+    <Container pos={'relative'} px={10} maxW={['', '', '1740px']}>
       <Router>
         <MyHeader />
-        <Box pt={'28'}>
+        <Box pt={'32'}>
           <Routes>
             <Route path="/" element={<AnimeHomePage />} />
             <Route path="/anime/:animeId/:episodeId" element={<AnimePlayer />}></Route>
