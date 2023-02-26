@@ -9,7 +9,7 @@ import MyHeader from './components/Header';
 function App() {
 
   return (
-    <Container pos={'relative'} px={10} maxW={['', '', '1740px']}>
+    <Container pos={'relative'} maxW={['', '', '1740px']}>
       <Router>
         <MyHeader />
         <Box pt={'32'}>
