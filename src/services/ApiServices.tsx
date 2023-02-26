@@ -1,5 +1,6 @@
 import axios from "axios";
 
+const url = import.meta.env.VITE_API_KEY
 
 async function fetchAnimeData(apiUrl: string) {
   try {
@@ -13,12 +14,12 @@ async function fetchAnimeData(apiUrl: string) {
 
 const apiService = {
   async getRecentAnime() {
-    const apiUrl = 'https://gogoanime.consumet.stream/recent-release';
+    const apiUrl = url+'recent-release';
     return await fetchAnimeData(apiUrl);
   },
 
   async getPopularAnime() {
-    const apiUrl = 'https://gogoanime.consumet.stream/top-airing';
+    const apiUrl = url+'top-airing';
     return await fetchAnimeData(apiUrl);
   }
 };

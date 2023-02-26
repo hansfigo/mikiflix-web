@@ -17,7 +17,7 @@ const VideoPlayer  : React.FC = ()=> {
     useEffect(() => {
         async function fetchVideoData() {
             try {
-                const url = `https://gogoanime.consumet.stream/vidcdn/watch/${episodeId}`
+                const url = `${import.meta.env.VITE_API_KEY}vidcdn/watch/${episodeId}`
                 const response = await fetch(url);
                 const data = await response.json();
                 setVideoUrl(data.sources[0].file);
