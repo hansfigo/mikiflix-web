@@ -34,7 +34,7 @@ const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section }: Ani
     return (<Box>
         <Flex mb={4} p={0} justifyContent={'space-between'} alignItems={'baseline'}>
             <Heading mb={4} fontSize={{ base: '2xl' }}>{title}</Heading>
-            <Flex gap={3}>
+            <Flex gap={3} display={{base:"none", md:'flex', lg : 'flex'}}>
                 <IconButton aria-label="Left Scroll">
                     <ChevronLeftIcon h={6} w={6} />
                 </IconButton>
