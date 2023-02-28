@@ -12,7 +12,7 @@ const AnimePlayer = () => {
             <Box maxW={'4xl'}>
                 <VideoPlayer />
             </Box>
-            <Heading>{episodeName}</Heading>
+            <Heading maxW={'4xl'} pt='8'>{episodeName}</Heading>
 
         </Box>
     )
