@@ -13,18 +13,16 @@ const VideoPlayer  : React.FC = ()=> {
     const { episodeId } = useParams<{ episodeId: string }>();
 
 
+   
+
     useEffect(() => {
         async function fetchVideoData() {
             try {
-                console.log(episodeId);
-                const url = `${import.meta.env.VITE_API_KEY}vidcdn/watch/${episodeId}`;
-                const response = await fetch(url, {
-                    headers: {
-                        Referer: "https://react-anime-api-web.vercel.app/"
-                    }
-                });
+                 console.log(episodeId)
+                const url = `${import.meta.env.VITE_API_KEY}vidcdn/watch/${episodeId}`
+                const response = await fetch(url);
                 const data = await response.json();
-                setVideoUrl(data.sources[0].file);
+                setVideoUrl(data.sources_bk[0].file);
             } catch (error) {
                 console.error(error);
             }
