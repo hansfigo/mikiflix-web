@@ -15,6 +15,7 @@ interface AnimeSection {
     title: string,
     isLoading: boolean | undefined,
     section: Anime[],
+    cardType : 'episode' | 'detail'
 }
 
 
@@ -29,7 +30,7 @@ const CardSkeleton: React.FC = () => {
     );
 };
 
-const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section }: AnimeSection) => {
+const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section, cardType }: AnimeSection) => {
 
     return (<Box>
         <Flex mb={4} p={0} justifyContent={'space-between'} alignItems={'baseline'}>
@@ -65,7 +66,9 @@ const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section }: Ani
                             imageUrl={anime.animeImg}
                             episodeNum={anime.episodeNum}
                             episodeId={anime.episodeId}
-                            animeId={anime.animeId} />
+                            animeId={anime.animeId} 
+                            cardType = {cardType}
+                            />
                     ))}
                 </Flex>
             </Flex>

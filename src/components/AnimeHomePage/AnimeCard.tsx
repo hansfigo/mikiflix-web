@@ -20,6 +20,7 @@ type AnimeCardProps = {
     episodeNum: number;
     episodeId: string;
     animeId: string;
+    cardType: 'episode' | 'detail';
 };
 
 const AnimeCard = ({
@@ -28,16 +29,17 @@ const AnimeCard = ({
     episodeNum,
     episodeId,
     animeId,
+    cardType,
 }: AnimeCardProps) => {
     return (
-        <Link to={`/anime/${animeId}/${episodeId}`}>
+        <Link to={cardType === 'episode' ? `/anime/${animeId}/${episodeId}` : `/anime/${animeId}`}>
             <Card
                 shadow={"none"}
                 rounded={"2xl"}
                 p={0}
-                minW={{base:'140px', lg : '220px'}}
-                _dark = {{bg : 'gray-700'}}
-            >   
+                minW={{ base: '140px', lg: '220px' }}
+                _dark={{ bg: 'gray-700' }}
+            >
                 <CardBody p={0}>
                     <Box>
                         <AspectRatio position={"relative"} ratio={2 / 3}>
@@ -48,22 +50,23 @@ const AnimeCard = ({
                             />
                         </AspectRatio>
                         <Box
+                            display={cardType === 'episode' ? 'flex' : 'none'}
                             position="absolute"
                             top="0"
                             left="0"
-                            p={{base : '1.5', md : '4'}}
+                            p={{ base: '1.5', md: '3' }}
                             bgGradient="linear(to-l, #BE72ED, #72A9F2)"
                             roundedTopLeft={"xl"}
                             roundedBottomRight={"xl"}
                         >
-                            <Text textColor={"white"} fontSize={["10px"]} fontWeight={"bold"}>
+                            <Text textColor={"white"} fontSize={{base: '10px', md: '14px'}} fontWeight={"bold"}>
                                 Episode {episodeNum}
                             </Text>
                         </Box>
                     </Box>
 
                     <Stack mt="4">
-                        <Heading noOfLines={2} fontWeight={"semibold"} size={["10px"]}>
+                        <Heading noOfLines={2} fontWeight={"semibold"} size={{base: '10px', md: '12px'}}>
                             {title}
                         </Heading>
                     </Stack>

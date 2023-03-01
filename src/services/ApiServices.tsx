@@ -14,12 +14,17 @@ async function fetchAnimeData(apiUrl: string) {
 
 const apiService = {
   async getRecentAnime() {
-    const apiUrl = url+'recent-release';
+    const apiUrl = url + 'recent-release';
     return await fetchAnimeData(apiUrl);
   },
 
   async getPopularAnime() {
-    const apiUrl = url+'top-airing';
+    const apiUrl = url + 'top-airing';
+    return await fetchAnimeData(apiUrl);
+  },
+
+  async getDetailAnime(animeId: string | undefined) {
+    const apiUrl = url + 'anime-details/' + animeId;
     return await fetchAnimeData(apiUrl);
   }
 };

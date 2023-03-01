@@ -42,8 +42,8 @@ const AnimeHomePage = () => {
     return (
         <>
             <Flex direction={'column'} gap={12}>
-                <AnimeSection title='Recent Relase' isLoading={isLoading} section={recentAnime} />
-                <AnimeSection title='Popular Anime' isLoading={isLoading} section={popularAnime} />
+                <AnimeSection title='Recent Relase' isLoading={isLoading} section={recentAnime} cardType="episode"/>
+                <AnimeSection title='Popular Anime' isLoading={isLoading} section={popularAnime} cardType="detail" />
             </Flex>
 
         </>
