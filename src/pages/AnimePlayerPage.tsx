@@ -1,4 +1,4 @@
-import { Box, Text, Heading, Flex } from "@chakra-ui/react";
+import { Box, Text, Heading, Flex, Button, Image } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import VideoPlayer from "../components/AnimePlayerPage/VideoPlayer"
 
@@ -14,8 +14,15 @@ const AnimePlayer = () => {
                 <VideoPlayer />
             </Box>
             <Heading maxW={'4xl'} fontSize={{ base: '2xl' }} noOfLines={2} pt='8'>{episodeName}</Heading>
-            <Link to={`/anime/${animeId}`}> 
-                <Text>{animeTitle}</Text>
+            <Link to={`/anime/${animeId}`}>
+                <Button>Next</Button>
+            </Link>
+            <Link to={`/anime/${animeId}`}>
+                <Flex>
+                    <Image src='gibbresh.png' fallbackSrc='https://via.placeholder.com/50' />
+                    <Text>{animeTitle}</Text>
+
+                </Flex>
             </Link>
         </Box>
 
