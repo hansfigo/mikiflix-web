@@ -51,12 +51,13 @@ const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section, cardT
                 ))}
             </SimpleGrid>
         ) : (
-            <Flex gap={2} overflowX="scroll" sx={{
+            <Flex gap={2} overflowX="auto" sx={{
                 scrollBehavior: 'smooth',
                 '&::-webkit-scrollbar': { display: 'none' },
                 '&::-moz-scrollbar': { display: 'none' },
                 '-ms-overflow-style': 'none',  /* IE and Edge */
-                'scrollbar-width': 'none',  /* Firefox */
+                'scrollbar-width': 'none',  
+                /* Firefox */
             }}>
                 <Flex gap={6} pos={'relative'}>
                     {section.map((anime, id) => (
