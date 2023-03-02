@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import apiService from "../services/ApiServices";
@@ -39,34 +39,40 @@ const AnimeDetailPage = () => {
     )
 
     return (
-        <Flex p={4} flexDir={{base: 'column', md : 'row'}} gap={12}>
-            <Image src={animeDetail?.animeImg} />
-            <Flex flexDir={{base : 'column', md : 'column'}} gap={5}>
-                <Heading>
-                    {animeDetail?.animeTitle}
-                </Heading>
-                <Text>
-                    {animeDetail?.synopsis}
-                </Text>
-                <Heading fontSize={'xl'}>Genres : </Heading>
-                <Flex gap={4}>
-                    {animeDetail?.genres.map((e) => {
-                        return (
-                            <Button>{e}</Button>
-                        )
-                    })}
-                </Flex>
-                <Heading fontSize={'xl'}>Episodes : </Heading>
-                {animeDetail?.episodesList.map((e) => {
-                    return (
-                        <Link to={`/anime/${animeId}/${e.episodeId}`}>
-                            <Button>{'Episode ' + e.episodeNum}</Button>
 
-                        </Link>
-                    )
-                }).reverse()}
+        <Flex p={4} flexDir={{ base: 'column', md: 'row' }} gap={12}>
+            {animeDetail && (<>
+                <Image rounded={'lg'} boxSize='sm' objectFit='cover' src={animeDetail?.animeImg} />
+                <Flex flexDir={{ base: 'column', md: 'column' }} gap={5}>
+                    <Heading>
+                        {animeDetail?.animeTitle}
+                    </Heading>
+                    <Text>
+                        {animeDetail?.synopsis}
+                    </Text>
+                    <Heading fontSize={'xl'}>Genres : </Heading>
+                    <Flex gap={4} flexWrap={'wrap'}>
+                        {animeDetail?.genres.map((e) => {
+                            return (
+                                <Button>{e}</Button>
+                            )
+                        })}
+                    </Flex>
+                    <Heading fontSize={'xl'}>Episodes : </Heading>
+                    <Flex flexWrap={'wrap'} gap={'4'}>
+                        {animeDetail?.episodesList.map((e) => {
+                            return (
+                                <Link to={`/anime/${animeId}/${e.episodeId}`}>
+                                    <Button>{'Episode ' + e.episodeNum}</Button>
 
-            </Flex>
+                                </Link>
+                            )
+                        }).reverse()}
+                    </Flex>
+
+
+                </Flex></>)}
+
         </Flex>
     )
 }

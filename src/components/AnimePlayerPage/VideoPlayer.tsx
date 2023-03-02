@@ -4,27 +4,28 @@ import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 import { log } from 'console';
 
-interface videoPlayerProps{
-    episodeId : string
+interface videoPlayerProps {
+    episodeId: string
 }
 
-const VideoPlayer  : React.FC = ()=> {
+const VideoPlayer = () => {
     const [videoUrl, setVideoUrl] = useState('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const { episodeId } = useParams<{ episodeId: string }>();
 
 
-   
+
 
     useEffect(() => {
         async function fetchVideoData() {
             try {
-                 console.log(episodeId)
+                setIsLoading(true);
                 const url = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`
                 const response = await fetch(url);
                 const data = await response.json();
-                console.log(data.sources[4].url)
                 setVideoUrl(data.sources[4].url);
+                setIsLoading(false)
             } catch (error) {
                 console.error(error);
             }
@@ -32,16 +33,22 @@ const VideoPlayer  : React.FC = ()=> {
 
         fetchVideoData();
     }, []);
-
     return (
-            <ReactPlayer
-                url={videoUrl}
-                controls
-                width="100%"
-                height="auto"
-                onError={(e) => console.log(e)}
-            />
-       )
+        <Box>
+            {
+                !isLoading ? <ReactPlayer
+                    url={videoUrl}
+                    controls
+                    width="100%"
+                    height="auto"
+                    onError={(e) => console.log(e)}
+                /> :
+                    <Text>Loading</Text>
+
+            }
+        </Box>
+    )
+
 }
 
 export default VideoPlayer;
