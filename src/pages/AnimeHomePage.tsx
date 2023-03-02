@@ -1,11 +1,6 @@
-import { Box, Stack, Container, Flex, Heading, Skeleton, HStack, VStack, SkeletonCircle, SkeletonText, Card, SimpleGrid, Text, IconButton } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import AnimeCard from "../components/AnimeHomePage/AnimeCard"
 import apiService from "../services/ApiServices"
-import api from '../pages/test'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { relative } from "path";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import AnimeSection from "../components/AnimeHomePage/AnimeSections";
 
 

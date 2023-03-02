@@ -5,6 +5,7 @@ import AnimePlayer from './pages/AnimePlayerPage'
 import { Box, Container } from '@chakra-ui/react';
 import MyHeader from './components/Header';
 import AnimeDetailPage from './pages/AnimeDetailPage';
+import MyFooter from './components/Footer';
 
 
 function App() {
@@ -13,13 +14,14 @@ function App() {
     <Container pos={'relative'} maxW={['', '', '1740px']}>
       <Router>
         <MyHeader />
-        <Box pt={'32'}>
+        <Box py={'32'}>
           <Routes>
             <Route path="/" element={<AnimeHomePage />} />
             <Route path="/anime/:animeId/:episodeId" element={<AnimePlayer />}></Route>
             <Route path="/anime/:animeId" element={<AnimeDetailPage />}></Route>
           </Routes>
         </Box>
+        <MyFooter/>
       </Router>
     </Container>
   )
