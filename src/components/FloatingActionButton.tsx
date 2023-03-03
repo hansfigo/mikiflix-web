@@ -20,10 +20,9 @@ function FloatingActionButton() {
             cursor="pointer"
         >
             {/* FAB icon */}
-            <Flex gap={2}>
+            <Flex alignItems={'center'} gap={2}>
                 <GiChemicalDrop />
-                <Text fontSize={'xs'}> Beta version</Text>
-
+                <Text fontSize={{base : 'xs', md: 'md'}}> Beta version</Text>
             </Flex>
 
         </Box>
