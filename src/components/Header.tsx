@@ -17,6 +17,7 @@ function MyHeader() {
     const toast = useToast();
     const toastIdRef = useRef<number | undefined>();
     const [height, setHeight] = useState('0px');
+    const [isClicked, setClicked] = useState<boolean>(false);
 
 
     function SearchBar() {
@@ -83,8 +84,10 @@ function MyHeader() {
         );
     }
 
-    function handleHamburger(){
-        setHeight(height == '0px' ? '100px' : '0px')
+    function handleHamburger() {
+        console.log(isClicked)
+        setClicked(isClicked ? false : true);
+        setHeight(height == '0px' ? '300px' : '0px')
     }
 
 
@@ -123,16 +126,21 @@ function MyHeader() {
                 >
                     <Box flexGrow="2">
                         <Flex alignItems={'center'}>
-                            <MyAvatar />
-                            <Heading
-                                display={{ base: 'flex', md: 'flex', lg: 'flex' }}
-                                fontSize={{ base: '3xl', md: '4xl', lg: '6xl' }}
-                                bgGradient="linear(to-l, #7928CA, #FF0080)"
-                                bgClip="text"
-                                fontWeight={'semibold'}
-                            >
-                                AnimeDB
-                            </Heading>
+                            {/* <Box bgSize={'12px'}>
+                                <MyAvatar />
+                            </Box> */}
+                            <RLink to={'/'}>
+                                <Heading
+                                    display={{ base: 'flex', md: 'flex', lg: 'flex' }}
+                                    fontSize={{ base: '2xl', md: '2xl', lg: '4xl' }}
+                                    bgGradient="linear(to-l, #7928CA, #FF0080)"
+                                    bgClip="text"
+                                    fontWeight={'semibold'}
+                                >
+                                    AnimeDB
+                                </Heading>
+                            </RLink>
+
                         </Flex>
 
                     </Box>
@@ -141,9 +149,10 @@ function MyHeader() {
                     </Box>
                     <Box flexGrow="1">
                         <Flex alignItems={'center'} justifyContent="end" pl={'4'} gap="2" display={{ base: 'flex', md: 'none', lg: 'none' }}>
-                            <IconButton onClick={onOpen} aria-label={'Search'}>
+                            {!isClicked ? <IconButton onClick={onOpen} aria-label={'Search'}>
                                 <AiOutlineSearch />
-                            </IconButton>
+                            </IconButton> : <DarkModeToggle />}
+
                             <IconButton onClick={handleHamburger} aria-label={'Hamburger MEnu'}>
                                 <GiHamburgerMenu />
                             </IconButton>
@@ -184,10 +193,12 @@ function MyHeader() {
                     </Box>
 
                 </Flex>
-                <Box style={{height, transition : 'height 0.4s ease-in-out'}} overflow={'hidden'}>
-                    <Box>🏠 Home</Box>
-                    <Box>Genre</Box>
-                </Box>
+                <Flex w={'full'} flexDir={'column'} pt={isClicked ? '3' : '0'} gap={3} style={{ height, transition: 'height 0.4s ease-in-out' }} overflow={'hidden'}>
+                    <Button w={'full'} bgColor={'transparent'}>Home</Button>
+                    <Button w={'full'} bgColor={'transparent'}>Genre</Button>
+                    <Button w={'full'} bgColor={'transparent'}>Top Airing</Button>
+                    <Button w={'full'} bgColor={'transparent'}>Recent Relase</Button>
+                </Flex>
 
 
             </Flex>

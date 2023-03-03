@@ -42,7 +42,7 @@ const AnimeDetailPage = () => {
 
         <Flex p={4} flexDir={{ base: 'column', md: 'row' }} gap={12}>
             {animeDetail && (<>
-                <Image rounded={'lg'} boxSize='sm' objectFit='cover' src={animeDetail?.animeImg} />
+                <Image rounded={'lg'} boxSize={{base : 'sm', md: 'lg'}} objectFit='cover' src={animeDetail?.animeImg} />
                 <Flex flexDir={{ base: 'column', md: 'column' }} gap={5}>
                     <Heading>
                         {animeDetail?.animeTitle}

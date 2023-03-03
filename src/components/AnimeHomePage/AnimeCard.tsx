@@ -34,6 +34,8 @@ const AnimeCard = ({
     return (
         <Link to={cardType === 'episode' ? `/anime/${animeId}/${episodeId}` : `/anime/${animeId}`}>
             <Card
+            transition={'ease-in-out 0.4s'}
+                _hover={{ bgGradient: 'linear(to-l, #7928CA, #FF0080)', bgClip : 'text' }}
                 shadow={"none"}
                 rounded={"2xl"}
                 p={0}
@@ -59,14 +61,14 @@ const AnimeCard = ({
                             roundedTopLeft={"xl"}
                             roundedBottomRight={"xl"}
                         >
-                            <Text textColor={"white"} fontSize={{base: '10px', md: '14px'}} fontWeight={"bold"}>
+                            <Text textColor={"white"} fontSize={{ base: '10px', md: '14px' }} fontWeight={"bold"}>
                                 Episode {episodeNum}
                             </Text>
                         </Box>
                     </Box>
 
                     <Stack mt="4">
-                        <Heading noOfLines={2} fontWeight={"semibold"} size={{base: '10px', md: '12px'}}>
+                        <Heading noOfLines={2} fontWeight={"semibold"} size={{ base: '10px', md: '12px' }}>
                             {title}
                         </Heading>
                     </Stack>
