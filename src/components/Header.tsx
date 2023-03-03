@@ -9,13 +9,14 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import DarkModeToggle from './ThemeSwitch';
 import { Link as RLink } from 'react-router-dom'
 import avatar from '/figomager.png'
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 
 function MyHeader() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const toast = useToast()
-    const toastIdRef = useRef<number | undefined>()
+    const toast = useToast();
+    const toastIdRef = useRef<number | undefined>();
+    const [height, setHeight] = useState('0px');
 
 
     function SearchBar() {
@@ -82,103 +83,115 @@ function MyHeader() {
         );
     }
 
+    function handleHamburger(){
+        setHeight(height == '0px' ? '100px' : '0px')
+    }
 
 
 
     return (
-        <Flex
-            shadow={'md'}
-            bg="rgba(255, 255, 255, 0.8)" /* semi-transparent background color */
-            backdropFilter="blur(10px)" /* for Chrome */
-            _dark={{ bg: 'rgba(0, 0, 0, 0.6)' }}
-            pos="fixed"
-            zIndex={10}
-            sx={{
-                "@-moz-document url-prefix()": {
-                    backgroundColor: "rgba(255, 255, 255, 0.8)",
-                    "-moz-backdrop-filter": "blur(10px)",
-                },
-            }}
-            w="100%"
-            justifyContent="center"
-            alignItems="center"
-            py="4"
-            gap={2}
-            left={0}
-            right={0}
-        >
-            <MyModal />
+        <>
             <Flex
-                alignItems="center"
-                justifyContent="space-between"
+                flexDir={{ base: 'column' }}
+                shadow={'md'}
+                bg="rgba(255, 255, 255, 0.8)" /* semi-transparent background color */
+                backdropFilter="blur(10px)" /* for Chrome */
+                _dark={{ bg: 'rgba(0, 0, 0, 0.6)' }}
+                pos="fixed"
+                zIndex={10}
+                sx={{
+                    "@-moz-document url-prefix()": {
+                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        "-moz-backdrop-filter": "blur(10px)",
+                    },
+                }}
                 w="100%"
-                px="4"
-                maxW="1740px"
+                justifyContent="center"
+                alignItems="center"
+                py="4"
+                gap={2}
+                left={0}
+                right={0}
             >
-                <Box flexGrow="2">
-                    <Flex alignItems={'center'}>
-                        <MyAvatar />
-                        <Heading
-                            display={{ base: 'flex', md: 'flex', lg: 'flex' }}
-                            fontSize={{ base: '3xl', md: '4xl', lg: '6xl' }}
-                            bgGradient="linear(to-l, #7928CA, #FF0080)"
-                            bgClip="text"
-                            fontWeight={'semibold'}
-                        >
-                            AnimeDB
-                        </Heading>
-                    </Flex>
+                <MyModal />
+                <Flex
+                    alignItems="center"
+                    justifyContent="space-between"
+                    w="100%"
+                    px="4"
+                    maxW="1740px"
+                >
+                    <Box flexGrow="2">
+                        <Flex alignItems={'center'}>
+                            <MyAvatar />
+                            <Heading
+                                display={{ base: 'flex', md: 'flex', lg: 'flex' }}
+                                fontSize={{ base: '3xl', md: '4xl', lg: '6xl' }}
+                                bgGradient="linear(to-l, #7928CA, #FF0080)"
+                                bgClip="text"
+                                fontWeight={'semibold'}
+                            >
+                                AnimeDB
+                            </Heading>
+                        </Flex>
 
-                </Box>
-                <Box flexGrow="1" display={{ base: 'none', md: 'flex', lg: 'flex' }}>
-                    <SearchBar />
-                </Box>
-                <Box flexGrow="1">
-                    <Flex alignItems={'center'} justifyContent="end" pl={'4'} gap="2" display={{ base: 'flex', md: 'none', lg: 'none' }}>
-                        <IconButton onClick={onOpen} aria-label={'Search'}>
-                            <AiOutlineSearch />
-                        </IconButton>
-                        <IconButton aria-label={'Hamburger MEnu'}>
-                            <GiHamburgerMenu />
-                        </IconButton>
-                        <DarkModeToggle />
-                    </Flex>
-                    <Flex display={{ base: 'none', md: 'flex', lg: 'flex' }} justifyContent="end" alignItems={'center'} gap="2">
-                        <Flex display={{ base: 'none', md: 'none', lg: 'flex' }} gap={2}>
-                            <Button>Home</Button>
-                            <Button onClick={() => toast({ status : 'warning', title: 'Genre Page Under Construction !!',  description: 'We are currently working hard to bring you this page. Stay tune' , duration: 2500,})}>Genre</Button>
+                    </Box>
+                    <Box flexGrow="1" display={{ base: 'none', md: 'flex', lg: 'flex' }}>
+                        <SearchBar />
+                    </Box>
+                    <Box flexGrow="1">
+                        <Flex alignItems={'center'} justifyContent="end" pl={'4'} gap="2" display={{ base: 'flex', md: 'none', lg: 'none' }}>
+                            <IconButton onClick={onOpen} aria-label={'Search'}>
+                                <AiOutlineSearch />
+                            </IconButton>
+                            <IconButton onClick={handleHamburger} aria-label={'Hamburger MEnu'}>
+                                <GiHamburgerMenu />
+                            </IconButton>
                         </Flex>
-                        <Flex display={{ base: 'none', md: 'flex', lg: 'flex' }} gap={2}>
-                            <Link href='https://github.com/hansfigo' isExternal>
-                                <IconButton
-                                    colorScheme="gray"
-                                    aria-label="Call Sage"
-                                    fontSize="24px"
-                                    icon={<ImGithub />}
-                                />
-                            </Link>
-                            <Link href='https://linkedin.com/in/claudio-hans-figo-bbb872203/' isExternal>
-                                <IconButton
-                                    colorScheme="gray"
-                                    aria-label="Call Sage"
-                                    fontSize="24px"
-                                    icon={<ImLinkedin />}
-                                />
-                            </Link>
-                            <Link href='https://www.instagram.com/hans.figo/' isExternal>
-                                <IconButton
-                                    colorScheme="gray"
-                                    aria-label="Call Sage"
-                                    fontSize="24px"
-                                    icon={<ImInstagram />}
-                                />
-                            </Link>
+                        <Flex display={{ base: 'none', md: 'flex', lg: 'flex' }} justifyContent="end" alignItems={'center'} gap="2">
+                            <Flex display={{ base: 'none', md: 'none', lg: 'flex' }} gap={2}>
+                                <Button>Home</Button>
+                                <Button onClick={() => toast({ status: 'warning', title: 'Genre Page Under Construction !!', description: 'We are currently working hard to bring you this page. Stay tune', duration: 2500, })}>Genre</Button>
+                            </Flex>
+                            <Flex display={{ base: 'none', md: 'flex', lg: 'flex' }} gap={2}>
+                                <Link href='https://github.com/hansfigo' isExternal>
+                                    <IconButton
+                                        colorScheme="gray"
+                                        aria-label="Call Sage"
+                                        fontSize="24px"
+                                        icon={<ImGithub />}
+                                    />
+                                </Link>
+                                <Link href='https://linkedin.com/in/claudio-hans-figo-bbb872203/' isExternal>
+                                    <IconButton
+                                        colorScheme="gray"
+                                        aria-label="Call Sage"
+                                        fontSize="24px"
+                                        icon={<ImLinkedin />}
+                                    />
+                                </Link>
+                                <Link href='https://www.instagram.com/hans.figo/' isExternal>
+                                    <IconButton
+                                        colorScheme="gray"
+                                        aria-label="Call Sage"
+                                        fontSize="24px"
+                                        icon={<ImInstagram />}
+                                    />
+                                </Link>
+                            </Flex>
+                            <DarkModeToggle />
                         </Flex>
-                        <DarkModeToggle />
-                    </Flex>
+                    </Box>
+
+                </Flex>
+                <Box style={{height, transition : 'height 0.4s ease-in-out'}} overflow={'hidden'}>
+                    <Box>🏠 Home</Box>
+                    <Box>Genre</Box>
                 </Box>
+
+
             </Flex>
-        </Flex>
+        </>
     );
 }
 

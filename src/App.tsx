@@ -14,7 +14,7 @@ function App() {
     <Container pos={'relative'} maxW={['', '', '1740px']}>
       <Router>
         <MyHeader />
-        <Box py={'32'}>
+        <Box minH={'100vh'} py={'32'}>
           <Routes>
             <Route path="/" element={<AnimeHomePage />} />
             <Route path="/anime/:animeId/:episodeId" element={<AnimePlayer />}></Route>
