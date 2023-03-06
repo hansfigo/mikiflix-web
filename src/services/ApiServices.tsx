@@ -16,25 +16,22 @@ async function fetchAnimeData(apiUrl: string, type: string) {
   }
 }
 
-const apiService = {
-  async getRecentAnime() {
-    const apiUrl = url + 'recent-episodes';
-    return await fetchAnimeData(apiUrl, 'general');
-  },
+export async function getRecentAnime() {
+  const apiUrl = url + 'recent-episodes';
+  return await fetchAnimeData(apiUrl, 'general');
+}
 
-  async getPopularAnime() {
-    const apiUrl = url + 'top-airing';
-    return await fetchAnimeData(apiUrl, 'general');
-  },
+export async function getPopularAnime() {
+  const apiUrl = url + 'top-airing';
+  return await fetchAnimeData(apiUrl, 'general');
+}
 
-  async getDetailAnime(animeId: string | undefined) {
-    const apiUrl = url + 'info/' + animeId;
-    return await fetchAnimeData(apiUrl, 'info');
-  },
-  async searchAnime(querry: string | undefined) {
-    const apiUrl = url + querry;
-    return await fetchAnimeData(apiUrl, 'info');
-  }
-};
+export async function getDetailAnime(animeId: string | undefined) {
+  const apiUrl = url + 'info/' + animeId;
+  return await fetchAnimeData(apiUrl, 'info');
+}
+export async function searchAnime(querry: string | undefined) {
+  const apiUrl = url + querry;
+  return await fetchAnimeData(apiUrl, 'general');
+}
 
-export default apiService;

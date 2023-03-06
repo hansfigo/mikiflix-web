@@ -10,6 +10,15 @@ export interface AnimeInfo {
     episodesList: EpisodeList[]
 }
 
+export interface Anime {
+    id: string;
+    title: string;
+    image: string;
+    releaseDate: string | null;
+    subOrDub: 'sub' | 'dub';
+  }
+  
+
 export interface EpisodeList {
     id: string,
     episodeNum: string

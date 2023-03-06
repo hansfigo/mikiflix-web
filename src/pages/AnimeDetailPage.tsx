@@ -1,7 +1,7 @@
 import { AspectRatio, Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import apiService from "../services/ApiServices";
+import {getDetailAnime} from "../services/ApiServices"
 
 
 interface AnimeDetail {
@@ -25,7 +25,6 @@ interface EpsList {
 const AnimeDetailPage = () => {
     const { animeId } = useParams();
 
-    const { getRecentAnime, getPopularAnime, getDetailAnime } = apiService;
     const [animeDetail, getAnimeDetail] = useState<AnimeDetail>();
 
     
@@ -37,7 +36,7 @@ const AnimeDetailPage = () => {
             }
             fetchData()
             console.log(animeDetail);
-        }, []
+        }, [animeId]
     )
 
     return (

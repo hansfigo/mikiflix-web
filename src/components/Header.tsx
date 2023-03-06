@@ -1,29 +1,42 @@
-import '../App.css';
-import { Text, Link, IconButton, Input, InputGroup, InputLeftElement, Modal, ModalContent, ModalOverlay, useDisclosure, Box, Button, Flex, Heading, Icon, Avatar, useToast } from "@chakra-ui/react";
+import { Text, Link, IconButton, Input, Image, InputGroup, InputLeftElement, Modal, ModalContent, ModalOverlay, useDisclosure, Box, Button, Flex, Heading, Icon, Avatar, useToast, ListItem, AspectRatio, Divider } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import Logo from '../../public/logo.png'
 import { ImGithub, ImLinkedin, ImInstagram } from 'react-icons/im'
 import { FaTools } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import DarkModeToggle from './ThemeSwitch';
 import { Link as RLink } from 'react-router-dom'
-import avatar from '/figomager.png'
-import { useRef, useState } from 'react';
+import { SetStateAction, useRef, useState } from 'react';
+import { searchAnime } from "../services/ApiServices";
+import { Anime } from "../types/interface";
 
 
 function MyHeader() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const toast = useToast();
-    const toastIdRef = useRef<number | undefined>();
     const [height, setHeight] = useState('0px');
     const [isClicked, setClicked] = useState<boolean>(false);
+    const [searchResult, setsearchResult] = useState<Anime[]>()
+
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newQuerry = event.target.value;
+        const timeoutId = setTimeout(async () => {
+            const res = await searchAnime(newQuerry);
+            console.log('res', res);
+            setsearchResult(res);
+            clearTimeout(timeoutId);
+        }, 3000)
+
+        console.log('searchResult', searchResult);
+    }
+
 
     function handleHamburger() {
-        console.log(isClicked)
+
         setClicked(isClicked ? false : true);
         setHeight(height == '0px' ? '300px' : '0px')
     }
+
 
     return (
         <>
@@ -140,14 +153,12 @@ function MyHeader() {
 
     function SearchBarModal() {
         return (
-            <InputGroup onClick={onOpen} size="lg" color="gray.800">
+            <InputGroup onChange={handleSearch} onClick={onOpen} size="lg" color="gray.800">
                 <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.400" />} />
                 <Input type="text" placeholder="Search Anime..." />
             </InputGroup>
         );
     }
-
-
 
     function MyModal() {
         return (
@@ -157,8 +168,23 @@ function MyHeader() {
                     backdropInvert="80%"
                     backdropFilter="blur(2px) hue-rotate(90deg)"
                 />
-                <ModalContent>
+                <ModalContent maxW="300px" >
                     <SearchBarModal />
+                    <Flex maxH="100vh" flexDir={'column'} gap={3} overflowY={'scroll'}>
+                        {searchResult?.map((result: any) => (
+                            <>
+                                <RLink onClick={onClose} to={`/anime/${result.id}`}>
+                                    <Flex gap={3}>
+                                        <Image src={result.image} alt={result.title} height={100} width={100} fit={'cover'} />
+                                        <Text fontSize={'md'} noOfLines={1}>{result.title}</Text>
+                                    </Flex>
+                                    <Divider></Divider>
+                                </RLink>
+                            </>
+
+                        ))}
+                    </Flex>
+
                 </ModalContent>
             </Modal>
         );

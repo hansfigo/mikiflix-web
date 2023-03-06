@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import apiService from "../services/ApiServices"
+import {getRecentAnime, getPopularAnime} from "../services/ApiServices"
 import AnimeSection from "../components/AnimeHomePage/AnimeSections";
 
 
@@ -14,7 +14,6 @@ const AnimeHomePage = () => {
         episodeId: string
 
     }
-    const { getRecentAnime, getPopularAnime } = apiService;
     const [recentAnime, setRecentAnime] = useState<Anime[]>([]);
     const [popularAnime, setPopularAnime] = useState<Anime[]>([]);
     const [isLoading, setIsloading] = useState<boolean>();
