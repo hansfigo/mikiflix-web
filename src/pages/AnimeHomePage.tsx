@@ -7,11 +7,11 @@ import AnimeSection from "../components/AnimeHomePage/AnimeSections";
 const AnimeHomePage = () => {
 
     interface Anime {
-        animeTitle: string;
-        animeImg: string;
-        episodeNum: number
+        id: string
+        title: string;
+        image: string;
+        episodeNumber: number
         episodeId: string
-        animeId: string
 
     }
     const { getRecentAnime, getPopularAnime } = apiService;
@@ -28,7 +28,9 @@ const AnimeHomePage = () => {
         };
 
         fetchData(getRecentAnime(), 'recent');
+        console.log(recentAnime);
         fetchData(getPopularAnime(), 'popular');
+        console.log(popularAnime);
     }, []);
 
 
