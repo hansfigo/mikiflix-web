@@ -168,15 +168,21 @@ function MyHeader() {
                     backdropInvert="80%"
                     backdropFilter="blur(2px) hue-rotate(90deg)"
                 />
-                <ModalContent maxW="300px" >
+                <ModalContent bg="rgba(255, 255, 255, 0.8)" /* semi-transparent background color */
+                    backdropFilter="blur(10px)" /* for Chrome */
+                    _dark={{ bg: 'rgba(0, 0, 0, 0.8)' }} maxW={{ base: '300px', md: '540px' }} >
                     <SearchBarModal />
-                    <Flex maxH="100vh" flexDir={'column'} gap={3} overflowY={'scroll'}>
+                    <Flex maxH="80vh" flexDir={'column'} gap={3} overflowY={'scroll'}>
                         {searchResult?.map((result: any) => (
                             <>
                                 <RLink onClick={onClose} to={`/anime/${result.id}`}>
-                                    <Flex gap={3}>
-                                        <Image src={result.image} alt={result.title} height={100} width={100} fit={'cover'} />
-                                        <Text fontSize={'md'} noOfLines={1}>{result.title}</Text>
+                                    <Flex gap={3} px={4} py={2}>
+                                        <Image src={result.image} alt={result.title} height={100} width={'16'} fit={'cover'} />
+                                        <Flex flexDir={'column'}>
+                                            <Text fontSize={'md'} fontWeight={'semibold'} noOfLines={1}>{result.title}</Text>
+                                            <Text fontSize={'sm'} fontWeight={'medium'} noOfLines={1}>{result.releaseDate}</Text>
+                                        </Flex>
+
                                     </Flex>
                                     <Divider></Divider>
                                 </RLink>
