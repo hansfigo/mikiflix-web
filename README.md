@@ -15,7 +15,9 @@ Mikiflix is still under development, but in the future we hope to have the follo
 
 ## Technologies Used
 Mikiflix is built using the following technologies:
-- Flutter
+- React Js
+- Typescript
+- Chakra UI
 - Consumet API
 
 ## Acknowledgments
