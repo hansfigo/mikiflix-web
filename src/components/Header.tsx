@@ -19,78 +19,11 @@ function MyHeader() {
     const [height, setHeight] = useState('0px');
     const [isClicked, setClicked] = useState<boolean>(false);
 
-
-    function SearchBar() {
-        return (
-            <InputGroup onClick={onOpen} size="lg" color="gray.800">
-                <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.400" />} />
-                <Input type="text" placeholder="Search Anime..." />
-            </InputGroup>
-        );
-    }
-
-    function SearchBarModal() {
-        return (
-            <InputGroup onClick={onOpen} size="lg" color="gray.800">
-                <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.400" />} />
-                <Input type="text" placeholder="Search Anime..." />
-            </InputGroup>
-        );
-    }
-
-    function ConstructionBox() {
-        return (
-            <Box p={{ base: 8, md: 8 }} borderRadius="md">
-                <Flex flexDirection={'column'} gap={6}>
-                    <Box>
-                        <Flex alignItems="center" mb={4}>
-                            <Icon as={FaTools} fontSize="2xl" mr={2} />
-                            <Heading size={{ base: 'md', md: 'md' }}>Seacrh Feature Under Construction</Heading>
-                        </Flex>
-                        <Text fontSize="lg">
-                            We are currently working hard to bring you this search feature. Stay tuned for
-                            updates!
-                        </Text>
-                    </Box>
-                    <Button onClick={onClose} >
-                        Got It
-                    </Button>
-                </Flex>
-
-            </Box>
-        );
-    };
-
-    function MyModal() {
-        return (
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay
-                    bg="blackAlpha.300"
-                    backdropInvert="80%"
-                    backdropFilter="blur(2px) hue-rotate(90deg)"
-                />
-                <ModalContent>
-                    <ConstructionBox />
-                </ModalContent>
-            </Modal>
-        );
-    }
-
-    function MyAvatar() {
-        return (
-            <RLink to={'/'}>
-                <Avatar src={avatar} size={{ base: 'md', md: 'lg' }} name="Figma" />
-            </RLink>
-        );
-    }
-
     function handleHamburger() {
         console.log(isClicked)
         setClicked(isClicked ? false : true);
         setHeight(height == '0px' ? '300px' : '0px')
     }
-
-
 
     return (
         <>
@@ -117,18 +50,9 @@ function MyHeader() {
                 right={0}
             >
                 <MyModal />
-                <Flex
-                    alignItems="center"
-                    justifyContent="space-between"
-                    w="100%"
-                    px="4"
-                    maxW="1740px"
-                >
+                <Flex alignItems="center" justifyContent="space-between" w="100%" px="4" maxW="1740px">
                     <Box flexGrow="2">
                         <Flex alignItems={'center'}>
-                            {/* <Box bgSize={'12px'}>
-                                <MyAvatar />
-                            </Box> */}
                             <RLink to={'/'}>
                                 <Heading
                                     display={{ base: 'flex', md: 'flex', lg: 'flex' }}
@@ -137,7 +61,7 @@ function MyHeader() {
                                     bgClip="text"
                                     fontWeight={'semibold'}
                                 >
-                                    AnimeDB
+                                    Mikiflix
                                 </Heading>
                             </RLink>
 
@@ -204,6 +128,67 @@ function MyHeader() {
             </Flex>
         </>
     );
+
+    function SearchBar() {
+        return (
+            <InputGroup onClick={onOpen} size="lg" color="gray.800">
+                <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.400" />} />
+                <Input type="text" placeholder="Search Anime..." />
+            </InputGroup>
+        );
+    }
+
+    function SearchBarModal() {
+        return (
+            <InputGroup onClick={onOpen} size="lg" color="gray.800">
+                <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.400" />} />
+                <Input type="text" placeholder="Search Anime..." />
+            </InputGroup>
+        );
+    }
+
+
+
+    function MyModal() {
+        return (
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay
+                    bg="blackAlpha.300"
+                    backdropInvert="80%"
+                    backdropFilter="blur(2px) hue-rotate(90deg)"
+                />
+                <ModalContent>
+                    <SearchBarModal />
+                </ModalContent>
+            </Modal>
+        );
+    }
+
+    function ConstructionBox() {
+        return (
+            <Box p={{ base: 8, md: 8 }} borderRadius="md">
+                <Flex flexDirection={'column'} gap={6}>
+                    <Box>
+                        <Flex alignItems="center" mb={4}>
+                            <Icon as={FaTools} fontSize="2xl" mr={2} />
+                            <Heading size={{ base: 'md', md: 'md' }}>Seacrh Feature Under Construction</Heading>
+                        </Flex>
+                        <Text fontSize="lg">
+                            We are currently working hard to bring you this search feature. Stay tuned for
+                            updates!
+                        </Text>
+                    </Box>
+                    <Button onClick={onClose} >
+                        Got It
+                    </Button>
+                </Flex>
+
+            </Box>
+        );
+    };
+
+
+
 }
 
 

@@ -4,12 +4,11 @@ import { useRef } from "react";
 import AnimeCard from "./AnimeCard"
 
 interface Anime {
-    animeTitle: string;
-    animeImg: string;
-    episodeNum: number
+    id: string
+    title: string;
+    image: string;
+    episodeNumber: number
     episodeId: string
-    animeId: string
-
 }
 
 interface AnimeSection {
@@ -80,11 +79,11 @@ const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section, cardT
                     {section.map((anime, id) => (
                         <AnimeCard
                             key={id}
-                            title={anime.animeTitle}
-                            imageUrl={anime.animeImg}
-                            episodeNum={anime.episodeNum}
+                            title={anime.title}
+                            image={anime.image}
+                            episodeNum={anime.episodeNumber}
                             episodeId={anime.episodeId}
-                            animeId={anime.animeId}
+                            id={anime.id}
                             cardType={cardType}
                         />
                     ))}

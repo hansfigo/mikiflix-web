@@ -5,20 +5,20 @@ import apiService from "../services/ApiServices";
 
 
 interface AnimeDetail {
-    animeTitle: string,
+    title: string,
     type: string,
+    image : string,
     relasedDate: string,
     status: string,
     genres: string[],
-    synopsis: string,
-    animeImg: string,
+    description: string,
     totalEpisodes: string,
-    episodesList: EpsList[]
+    episodes: EpsList[]
 }
 
 interface EpsList {
-    episodeId: string,
-    episodeNum: string
+    id: string,
+    number: string
 }
 
 
@@ -28,13 +28,15 @@ const AnimeDetailPage = () => {
     const { getRecentAnime, getPopularAnime, getDetailAnime } = apiService;
     const [animeDetail, getAnimeDetail] = useState<AnimeDetail>();
 
+    
+
     useEffect(
         () => {
             const fetchData = async () => {
                 getAnimeDetail(await getDetailAnime(animeId));
             }
             fetchData()
-
+            console.log(animeDetail);
         }, []
     )
 
@@ -42,13 +44,13 @@ const AnimeDetailPage = () => {
 
         <Flex p={4} flexDir={{ base: 'column', md: 'row' }} gap={12}>
             {animeDetail && (<>
-                <Image rounded={'lg'} boxSize={{base : 'sm', md: 'lg'}} objectFit='cover' src={animeDetail?.animeImg} />
+                <Image rounded={'lg'} boxSize={{base : 'sm', md: 'lg'}} objectFit='cover' src={animeDetail?.image} />
                 <Flex flexDir={{ base: 'column', md: 'column' }} gap={5}>
                     <Heading>
-                        {animeDetail?.animeTitle}
+                        {animeDetail?.title}
                     </Heading>
                     <Text>
-                        {animeDetail?.synopsis}
+                        {animeDetail?.description}
                     </Text>
                     <Heading fontSize={'xl'}>Genres : </Heading>
                     <Flex gap={4} flexWrap={'wrap'}>
@@ -60,10 +62,10 @@ const AnimeDetailPage = () => {
                     </Flex>
                     <Heading fontSize={'xl'}>Episodes : </Heading>
                     <Flex flexWrap={'wrap'} gap={'4'}>
-                        {animeDetail?.episodesList.map((e) => {
+                        {animeDetail?.episodes.map((e) => {
                             return (
-                                <Link to={`/anime/${animeId}/${e.episodeId}`}>
-                                    <Button>{'Episode ' + e.episodeNum}</Button>
+                                <Link to={`/anime/${animeId}/${e.id}`}>
+                                    <Button>{'Episode ' + e.number}</Button>
 
                                 </Link>
                             )

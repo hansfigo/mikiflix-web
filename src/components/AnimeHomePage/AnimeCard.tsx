@@ -16,23 +16,23 @@ import { Link } from "react-router-dom";
 
 type AnimeCardProps = {
     title: string;
-    imageUrl: string;
+    image: string;
     episodeNum: number;
     episodeId: string;
-    animeId: string;
+    id: string;
     cardType: 'episode' | 'detail';
 };
 
 const AnimeCard = ({
     title,
-    imageUrl,
+    image,
     episodeNum,
     episodeId,
-    animeId,
+    id,
     cardType,
 }: AnimeCardProps) => {
     return (
-        <Link to={cardType === 'episode' ? `/anime/${animeId}/${episodeId}` : `/anime/${animeId}`}>
+        <Link to={cardType === 'episode' ? `/anime/${id}/${episodeId}` : `/anime/${id}`}>
             <Card
             transition={'ease-in-out 0.4s'}
                 _hover={{ bgGradient: 'linear(to-l, #7928CA, #FF0080)', bgClip : 'text' }}
@@ -46,8 +46,8 @@ const AnimeCard = ({
                     <Box>
                         <AspectRatio position={"relative"} ratio={2 / 3}>
                             <Image
-                                src={imageUrl}
-                                alt={animeId}
+                                src={image}
+                                alt={id}
                                 borderRadius="2xl"
                             />
                         </AspectRatio>

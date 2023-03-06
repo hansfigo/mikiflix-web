@@ -11,6 +11,6 @@ export interface AnimeInfo {
 }
 
 export interface EpisodeList {
-    episodeId: string,
+    id: string,
     episodeNum: string
 }
