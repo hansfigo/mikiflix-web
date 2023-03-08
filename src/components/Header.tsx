@@ -44,6 +44,14 @@ function MyHeader() {
         onClose(); // call the original onClose function
     };
 
+    const handleOpen = () =>{
+        setsearchResult([]); // clear the query state variable
+        onOpen(); // 
+    }
+    const handleClickSearch = ()=>{
+        setsearchResult([]); 
+    }
+
     const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
             setsearchResult([]);
@@ -102,7 +110,7 @@ function MyHeader() {
                     </Box>
                     <Box flexGrow="1">
                         <Flex alignItems={'center'} justifyContent="end" pl={'4'} gap="2" display={{ base: 'flex', md: 'none', lg: 'none' }}>
-                            {!isClicked ? <IconButton onClick={onOpen} aria-label={'Search'}>
+                            {!isClicked ? <IconButton onClick={handleOpen} aria-label={'Search'}>
                                 <AiOutlineSearch />
                             </IconButton> : <DarkModeToggle />}
 
@@ -171,7 +179,7 @@ function MyHeader() {
         return (
             <InputGroup onKeyDown={handleSearch} onClick={onOpen} size="lg" color="gray.800">
                 <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.400" />} />
-                <Input type="text" placeholder="Search Anime..." />
+                <Input _dark={{textColor : 'white'}} type="text" placeholder="Search Anime..." />
             </InputGroup>
         );
     }
