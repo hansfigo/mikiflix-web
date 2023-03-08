@@ -1,4 +1,4 @@
-import { Text, Link, IconButton, Input, Image, InputGroup, InputLeftElement, Modal, ModalContent, ModalOverlay, useDisclosure, Box, Button, Flex, Heading, Icon, Avatar, useToast, ListItem, AspectRatio, Divider } from "@chakra-ui/react";
+import { Text, Link, IconButton, Input, Image, InputGroup, InputLeftElement, Modal, ModalContent, ModalOverlay, useDisclosure, Box, Button, Flex, Heading, Icon, Avatar, useToast, ListItem, AspectRatio, Divider, CircularProgress } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { ImGithub, ImLinkedin, ImInstagram } from 'react-icons/im'
 import { FaTools } from "react-icons/fa";
@@ -6,7 +6,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import DarkModeToggle from './ThemeSwitch';
 import { Link as RLink } from 'react-router-dom'
-import { SetStateAction, useRef, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 import { searchAnime } from "../services/ApiServices";
 import { Anime } from "../types/interface";
 
@@ -17,25 +17,41 @@ function MyHeader() {
     const [height, setHeight] = useState('0px');
     const [isClicked, setClicked] = useState<boolean>(false);
     const [searchResult, setsearchResult] = useState<Anime[]>()
+    const [query, setQuery] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newQuerry = event.target.value;
-        const timeoutId = setTimeout(async () => {
-            const res = await searchAnime(newQuerry);
+    useEffect(() => {
+        console.log('EF')
+        const search = async () => {
+            setLoading(true);
+            const res = await searchAnime(query);
             console.log('res', res);
-            setsearchResult(res);
-            clearTimeout(timeoutId);
-        }, 3000)
+            setsearchResult(res)
+            setLoading(false);
+        }
+        search();
 
-        console.log('searchResult', searchResult);
-    }
-
+    }, [query])
 
     function handleHamburger() {
 
         setClicked(isClicked ? false : true);
         setHeight(height == '0px' ? '300px' : '0px')
     }
+
+    const handleClose = () => {
+        setsearchResult([]); // clear the query state variable
+        onClose(); // call the original onClose function
+    };
+
+    const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            setsearchResult([]);
+            const inputElement = event.target as HTMLInputElement;
+            console.log(inputElement.value)
+            setQuery(inputElement.value);
+        }
+    };
 
 
     return (
@@ -153,7 +169,7 @@ function MyHeader() {
 
     function SearchBarModal() {
         return (
-            <InputGroup onChange={handleSearch} onClick={onOpen} size="lg" color="gray.800">
+            <InputGroup onKeyDown={handleSearch} onClick={onOpen} size="lg" color="gray.800">
                 <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.400" />} />
                 <Input type="text" placeholder="Search Anime..." />
             </InputGroup>
@@ -162,7 +178,7 @@ function MyHeader() {
 
     function MyModal() {
         return (
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} onClose={handleClose}>
                 <ModalOverlay
                     bg="blackAlpha.300"
                     backdropInvert="80%"
@@ -173,7 +189,11 @@ function MyHeader() {
                     _dark={{ bg: 'rgba(0, 0, 0, 0.8)' }} maxW={{ base: '300px', md: '540px' }} >
                     <SearchBarModal />
                     <Flex maxH="80vh" flexDir={'column'} gap={3} overflowY={'scroll'}>
-                        {searchResult?.map((result: any) => (
+                        {loading ?
+                         <Flex justifyContent={'center'}>
+                            <CircularProgress color={'blackAlpha.800'}/>
+                        </Flex> : 
+                        searchResult?.map((result: any) => (
                             <>
                                 <RLink onClick={onClose} to={`/anime/${result.id}`}>
                                     <Flex gap={3} px={4} py={2}>
