@@ -12,7 +12,7 @@ import FloatingActionButton from './components/FloatingActionButton';
 function App() {
 
   return (
-    <Container pos={'relative'} maxW={['', '', '1740px']}>
+    <Container pos={'relative'} maxW={['', '', '1740px']} overflow={'hidden'}>
       <Router>
         <MyHeader />
         <Box minH={'100vh'} py={'32'}>

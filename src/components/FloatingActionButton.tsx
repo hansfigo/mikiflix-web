@@ -9,7 +9,7 @@ function FloatingActionButton() {
             bottom="6"
             right="4"
             borderRadius="xl"
-            bgGradient="linear(to-l, #7928CA, #FF0080)"
+            bgGradient="linear-gradient(135deg, #007AFF, #00BFFF)"
             color="white"
             boxShadow="md"
             display="flex"

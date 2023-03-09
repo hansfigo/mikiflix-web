@@ -9,6 +9,7 @@ import { Link as RLink } from 'react-router-dom'
 import { SetStateAction, useEffect, useRef, useState } from 'react';
 import { searchAnime } from "../services/ApiServices";
 import { Anime } from "../types/interface";
+import '../App.css';
 
 
 function MyHeader() {
@@ -94,9 +95,10 @@ function MyHeader() {
                                 <Heading
                                     display={{ base: 'flex', md: 'flex', lg: 'flex' }}
                                     fontSize={{ base: '2xl', md: '2xl', lg: '4xl' }}
-                                    bgGradient="linear(to-l, #7928CA, #FF0080)"
+                                    bgGradient="linear-gradient(135deg, #007AFF, #00BFFF)"
                                     bgClip="text"
                                     fontWeight={'semibold'}
+                                    style={{ fontFamily: "Viga" }}
                                 >
                                     Mikiflix
                                 </Heading>
