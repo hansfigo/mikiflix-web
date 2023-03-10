@@ -38,7 +38,7 @@ const VideoPlayer = () => {
         <Box>
             {
                 !isLoading ? <ReactPlayer
-                    url={'https://cors.delusionz.xyz/' + videoUrl}
+                    url={`https://cors.haikei.xyz/${videoUrl}`}
                     controls
                     width="100%"
                     height="auto"
