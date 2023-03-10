@@ -16,8 +16,11 @@ const AnimePlayer = () => {
                 <Box maxW={'4xl'}>
                     <VideoPlayer refresh =  {refresh} />
                 </Box>
-                <Button pt={2} onClick={()=>setRefresh(!refresh)}>Refresh ?</Button>
-                <Heading maxW={'4xl'} fontSize={{ base: '2xl' }} noOfLines={2} pt='8'>{episodeName}</Heading>
+                <Flex w={'full'} justifyContent={'end'} alignItems={'baseline'} gap={2} fontSize={'xs'}>
+                <Text>Video Error ? </Text>
+                <Button fontSize={'xs'} pt={2} colorScheme='blue' variant='link' onClick={()=>setRefresh(!refresh)}>Refresh</Button>
+                </Flex>
+                <Heading maxW={'4xl'} fontSize={{ base: '2xl' }} noOfLines={2} pt='4'>{episodeName}</Heading>
             </Box>
             <Link to={`/anime/${animeId}`}>
                 <Flex gap={2}>
