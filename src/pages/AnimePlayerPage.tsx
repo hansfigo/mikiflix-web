@@ -13,6 +13,7 @@ const AnimePlayer = () => {
 
     const episodeName = episodeId?.replace(/-/g, ' ').toLowerCase().replace(/\b\w/g, c => c.toUpperCase())
     const animeTitle = animeId?.replace(/-/g, ' ').toLowerCase().replace(/\b\w/g, c => c.toUpperCase())
+    
     return (
         <Flex flexDir={{ base: 'column' }} gap={4}>
             <Box>

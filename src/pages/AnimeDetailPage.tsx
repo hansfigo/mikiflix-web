@@ -1,13 +1,13 @@
 import { AspectRatio, Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {getDetailAnime} from "../services/ApiServices"
+import { getDetailAnime } from "../services/ApiServices"
 
 
 interface AnimeDetail {
     title: string,
     type: string,
-    image : string,
+    image: string,
     relasedDate: string,
     status: string,
     genres: string[],
@@ -24,26 +24,29 @@ interface EpsList {
 
 const AnimeDetailPage = () => {
     const { animeId } = useParams();
-
     const [animeDetail, getAnimeDetail] = useState<AnimeDetail>();
-
-    
+    const [isLoading, setIsLoading] =useState<boolean>(false);
 
     useEffect(
+
         () => {
+            console.log(animeDetail);
             const fetchData = async () => {
+                setIsLoading(true);
                 getAnimeDetail(await getDetailAnime(animeId));
+                setIsLoading(false);
             }
             fetchData()
-            console.log(animeDetail);
         }, [animeId]
+
     )
 
     return (
 
         <Flex p={4} flexDir={{ base: 'column', md: 'row' }} gap={12}>
-            {animeDetail && (<>
-                <Image rounded={'lg'} boxSize={{base : 'sm', md: 'lg'}} objectFit='cover' src={animeDetail?.image} />
+                
+            {isLoading ? <Text>Loading</Text> : <>
+                <Image rounded={'lg'} boxSize={{ base: 'sm', md: 'lg' }} objectFit='cover' src={animeDetail?.image} />
                 <Flex flexDir={{ base: 'column', md: 'column' }} gap={5}>
                     <Heading>
                         {animeDetail?.title}
@@ -72,7 +75,7 @@ const AnimeDetailPage = () => {
                     </Flex>
 
 
-                </Flex></>)}
+                </Flex></>}
 
         </Flex>
     )
