@@ -5,13 +5,15 @@ import { useParams } from 'react-router-dom';
 
 interface videoPlayerProps {
     refresh: boolean;
+    setHasError : React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const VideoPlayer = ({ refresh }: videoPlayerProps) => {
+const VideoPlayer = ({ refresh, setHasError }: videoPlayerProps) => {
     const [videoUrl, setVideoUrl] = useState('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isReady, setIsReady] = useState<boolean>(false);
     const { episodeId } = useParams<{ episodeId: string }>();
+
 
     useEffect(() => {
         async function fetchVideoData() {
@@ -20,10 +22,11 @@ const VideoPlayer = ({ refresh }: videoPlayerProps) => {
                 const url = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
                 const response = await fetch(url);
                 const data = await response.json();
-                setVideoUrl(data.sources[4].url);
+                setVideoUrl(data.sources[0].url);
                 setIsLoading(false);
                 setIsReady(true);
             } catch (error) {
+                throw error;
                 console.error('error');
             }
         }
@@ -39,20 +42,17 @@ const VideoPlayer = ({ refresh }: videoPlayerProps) => {
         return null;
     }
 
-    try {
-        return (
+    return (
 
-            <ReactPlayer
-                url={`https://cors.haikei.xyz/${videoUrl}`}
-                controls
-                width="100%"
-                height="auto"
-                onError={(e) => console.log(e)}
-            />
-        );
-    } catch (error) {
-        return <Text>Error: {'err'}</Text>;
-    }
+        <ReactPlayer
+            url={`https://cors.haikei.xyz/${videoUrl}`}
+            controls
+            width="100%"
+            height="auto"
+            onError={(e) => setHasError(true)}
+        />
+    );
+
 };
 
 export default VideoPlayer;
