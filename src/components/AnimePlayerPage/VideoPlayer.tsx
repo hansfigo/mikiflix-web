@@ -13,9 +13,11 @@ const VideoPlayer = ({ refresh, setHasError }: videoPlayerProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isReady, setIsReady] = useState<boolean>(false);
     const { episodeId } = useParams<{ episodeId: string }>();
+    const corsProxy =  ['https://cors.haikei.xyz/', 'https://m3u8proxy.hambasahaya0303.workers.dev/?url='];
 
 
     useEffect(() => {
+        console.log(videoUrl);
         async function fetchVideoData() {
             try {
                 setIsLoading(true);
@@ -45,7 +47,7 @@ const VideoPlayer = ({ refresh, setHasError }: videoPlayerProps) => {
     return (
 
         <ReactPlayer
-            url={`https://cors.haikei.xyz/${videoUrl}`}
+            url={`${corsProxy[1]}${videoUrl}`}
             controls
             width="100%"
             height="auto"
