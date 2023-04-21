@@ -24,5 +24,5 @@ Mikiflix is built using the following technologies:
 
 We would like to thank the Consumet, the API provider that is consumed by Mikiflix for providing us with access to their database of anime shows and movies. Their API has been instrumental in helping us build our site and offer a wide selection of anime content to our users.
 
-Alse special thanks to the creators of Madoka Magica for inspiring the name of this site, and to the community of anime fans who continue to support and enjoy anime.
+Alse special thanks to the creators of Madoka Magica for inspiring the name of this site, and to the community of anime fans who continue to support and enjoy anime..
 
