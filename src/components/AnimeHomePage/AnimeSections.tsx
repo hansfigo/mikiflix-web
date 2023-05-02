@@ -1,15 +1,9 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import { Flex, Box, Heading, IconButton, SimpleGrid, SkeletonText, Card, Skeleton } from "@chakra-ui/react"
 import { useRef } from "react";
-import AnimeCard from "./AnimeCard"
-
-interface Anime {
-    id: string
-    title: string;
-    image: string;
-    episodeNumber: number
-    episodeId: string
-}
+import { Anime, RecentAnime } from "../../types/interface";
+import AnimeCard from "./AnimeCard";
+import RecentEpisodeCard from "./RecentEpisodeCard";
 
 interface AnimeSection {
     title: string,
@@ -17,9 +11,6 @@ interface AnimeSection {
     section: Anime[],
     cardType: 'episode' | 'detail'
 }
-
-
-
 
 const CardSkeleton: React.FC = () => {
     return (
@@ -31,31 +22,28 @@ const CardSkeleton: React.FC = () => {
 };
 
 const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section, cardType }: AnimeSection) => {
-
     const scrollRef = useRef<HTMLInputElement>(null);
 
     const handleScrollButton = (direction: string) => {
         if (direction === 'left') {
             if (scrollRef.current != null) {
                 scrollRef.current.scrollLeft -= 800;
-
             }
-        }else{
+        } else {
             if (scrollRef.current != null) {
                 scrollRef.current.scrollLeft += 800;
 
             }
         }
-
     }
     return (<Box>
         <Flex mb={4} p={0} justifyContent={'space-between'} alignItems={'baseline'}>
             <Heading mb={4} fontSize={{ base: '2xl' }}>{title}</Heading>
             <Flex gap={3} display={{ base: "none", md: 'flex', lg: 'flex' }}>
-                <IconButton onClick={()=> {handleScrollButton('left')}} aria-label="Left Scroll">
+                <IconButton onClick={() => { handleScrollButton('left') }} aria-label="Left Scroll">
                     <ChevronLeftIcon h={6} w={6} />
                 </IconButton>
-                <IconButton onClick={()=> {handleScrollButton('right')}} aria-label="Right Scroll">
+                <IconButton onClick={() => { handleScrollButton('right') }} aria-label="Right Scroll">
                     <ChevronRightIcon h={6} w={6} />
                 </IconButton>
             </Flex>
@@ -77,19 +65,28 @@ const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section, cardT
             }}>
                 <Flex gap={6} pos={'relative'}>
                     {section.map((anime, id) => (
-                        <AnimeCard
-                            key={id}
-                            title={anime.title}
-                            image={anime.image}
-                            episodeNum={anime.episodeNumber}
-                            episodeId={anime.episodeId}
-                            id={anime.id}
-                            cardType={cardType}
-                        />
+                        cardType === 'episode' ? (
+                            <RecentEpisodeCard
+                                key={id}
+                                title={anime.title}
+                                image={anime.image}
+                                episodeId={anime.episodeId}
+                                id={anime.id}
+                                type={anime.type}
+                                episodeNumber={anime.episodeNumber} />
+                        ) : (
+                            <AnimeCard
+                                key={id}
+                                title={anime.title}
+                                image={anime.image}
+                                episodeId={anime.episodeId}
+                                id={anime.id}
+                                type={anime.type}
+                                episodeNumber={anime.episodeNumber} />
+                        )
                     ))}
                 </Flex>
             </Flex>
-
         )}
     </Box>)
 }

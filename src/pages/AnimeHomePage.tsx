@@ -2,19 +2,14 @@ import { Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getRecentAnime, getPopularAnime } from "../services/ApiServices"
 import AnimeSection from "../components/AnimeHomePage/AnimeSections";
+import { RecentAnime, Anime } from "../types/interface";
+
 
 
 const AnimeHomePage = () => {
 
-    interface Anime {
-        id: string
-        title: string;
-        image: string;
-        episodeNumber: number
-        episodeId: string
-
-    }
-    const [recentAnime, setRecentAnime] = useState<Anime[]>([]);
+  
+    const [recentAnime, setRecentAnime] = useState<RecentAnime[]>([]);
     const [popularAnime, setPopularAnime] = useState<Anime[]>([]);
     const [isLoading, setIsloading] = useState<boolean>();
     const [error, setError] = useState<string | null>(null);
@@ -33,9 +28,12 @@ const AnimeHomePage = () => {
             setIsloading(false);
 
         };
-        // console.log('STATE', error);
         fetchData(getRecentAnime(), 'recent');
         fetchData(getPopularAnime(), 'popular');
+
+
+        console.log(popularAnime);
+        
     }, []);
 
 
@@ -47,12 +45,8 @@ const AnimeHomePage = () => {
                 <AnimeSection title='Recent Relase' isLoading={isLoading} section={recentAnime} cardType="episode" />
                 <AnimeSection title='Popular Anime' isLoading={isLoading} section={popularAnime} cardType="detail" />
             </Flex> : <p>{error}</p>}
-
-
         </>
     );
-
-
 
 }
 export default AnimeHomePage
