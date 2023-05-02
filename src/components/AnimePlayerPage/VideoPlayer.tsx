@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Skeleton, Stack, Text } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 
@@ -13,6 +13,9 @@ const VideoPlayer = ({ refresh, setHasError }: videoPlayerProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isReady, setIsReady] = useState<boolean>(false);
     const { episodeId } = useParams<{ episodeId: string }>();
+
+    console.log(episodeId);
+    
     const corsProxy =  ['https://cors.haikei.xyz/', 'https://m3u8proxy.hambasahaya0303.workers.dev/?url='];
 
 
@@ -21,7 +24,7 @@ const VideoPlayer = ({ refresh, setHasError }: videoPlayerProps) => {
         async function fetchVideoData() {
             try {
                 setIsLoading(true);
-                const url = `https://api.consumet.org/anime/gogoanime/watch/${episodeId}`;
+                const url = `https://api.consumet.org/meta/anilist/watch/${episodeId}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 setVideoUrl(data.sources[0].url);

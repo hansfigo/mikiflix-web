@@ -203,13 +203,13 @@ function MyHeader() {
                          <Flex justifyContent={'center'}>
                             <CircularProgress color={'blackAlpha.800'}/>
                         </Flex> : 
-                        searchResult?.map((result: any) => (
+                        searchResult?.map((result) => (
                             <>
                                 <RLink onClick={onClose} to={`/anime/${result.id}`}>
                                     <Flex gap={3} px={4} py={2}>
-                                        <Image src={result.image} alt={result.title} height={100} width={'16'} fit={'cover'} />
+                                        <Image src={result.image} alt={result.title?.romaji} height={100} width={'16'} fit={'cover'} />
                                         <Flex flexDir={'column'}>
-                                            <Text fontSize={'md'} fontWeight={'semibold'} noOfLines={1}>{result.title}</Text>
+                                            <Text fontSize={'md'} fontWeight={'semibold'} noOfLines={1}>{result.title?.romaji}</Text>
                                             <Text fontSize={'sm'} fontWeight={'medium'} noOfLines={1}>{result.releaseDate}</Text>
                                         </Flex>
 
