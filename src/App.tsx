@@ -8,8 +8,8 @@ import AnimeDetailPage from './pages/AnimeDetailPage';
 import MyFooter from './components/Footer';
 import FloatingActionButton from './components/FloatingActionButton';
 
-
-function App() {
+// Change function for const to make it easier to read
+const App = () => {
 
   return (
     <Container pos={'relative'} maxW={['', '', '1740px']} overflow={'hidden'}>
