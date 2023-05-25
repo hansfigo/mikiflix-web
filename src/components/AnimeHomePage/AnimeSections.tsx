@@ -49,9 +49,12 @@ const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section, cardT
             </Flex>
         </Flex>
         {isLoading ? (
+            // You forgot to add a key when you map an array
             <SimpleGrid gap={'24'} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                 {[...Array(20)].map((_, i) => (
-                    <CardSkeleton />
+                    <CardSkeleton
+                        key={i}
+                    />
                 ))}
             </SimpleGrid>
         ) : (

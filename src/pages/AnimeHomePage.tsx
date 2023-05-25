@@ -41,7 +41,7 @@ const AnimeHomePage = () => {
 
     return (
         <>
-            {!error ? <Flex direction={'column'} gap={12}>
+            {!error ? <Flex direction={'column'} gap={12} >
                 <AnimeSection title='Recent Relase' isLoading={isLoading} section={recentAnime} cardType="episode" />
                 <AnimeSection title='Popular Anime' isLoading={isLoading} section={popularAnime} cardType="detail" />
             </Flex> : <p>{error}</p>}
