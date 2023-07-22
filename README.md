@@ -1,6 +1,22 @@
-# Mikiflix
+<p align="center">
+  <a href="https://mikiflix-vercel.app">
+    <img alt="mikiflix" src="mikiflix-logo.svg" width="150">
+  </a>
+</p>
 
+<h1 align="center">
+  Mikiflix
+</h1>
+
+<p align="center">
 Mikiflix is a free anime streaming site where you can watch your favorite anime shows and movies online. The site is named after Miki Sayaka from Madoka Magica, one of the most beloved and tragic characters in the series.
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React">
+  <img src="https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white" alt="Chakra">
+  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel">
+</p>
 
 ## Features
 
