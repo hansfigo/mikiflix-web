@@ -16,7 +16,9 @@ const helpers = () => {
     const search = async () => {
         setLoading(true);
         const res = await searchAnime(query);
-        setsearchResult(res)
+        console.log("Res",res);
+        
+        setsearchResult(res.results)
         setLoading(false);
     }
     

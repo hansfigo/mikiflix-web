@@ -21,24 +21,37 @@ const RecentEpisodeCard = ({
 }: Anime) => {
 
     console.log(title);
-    
+
     const [animeInfo, setAnimeInfo] = useState<AnimeInfo>();
     const [episodeId, setEpisodeId] = useState<string>();
-
+    const [isHaveEpisode, setHaveEpisode] = useState<boolean>(true);
+    
     useEffect(() => {
         const fetchData = async () => {
-            const anime = await getDetailAnime(id);
-            setAnimeInfo(anime);
-            setEpisodeId(anime.episodes[episodeNumber! - 1]?.id);
+            try {
+                const anime = await getDetailAnime(id);
+    
+                setAnimeInfo(anime);
+    
+                if (anime && anime.episode) {
+                    setEpisodeId(anime.episode[episodeNumber! - 1]?.id);
+                } else {
+                    setHaveEpisode(false);
+                }
+            } catch (error) {
+                // Handle the error, e.g., display an error message or log it.
+                console.error("Error fetching anime data:", error);
+            }
         };
-
+    
         fetchData();
     }, [id, episodeNumber]);
+    
 
     return (
 
-        episodeId ? (
-            <Link to={`/anime/${id}/${episodeId}`}><Card
+       (
+            <Link to={isHaveEpisode ? `/anime/${id}/${episodeId}` : `/anime/${id}/$`}><Card
                 transition={"ease-in-out 0.4s"}
                 _hover={{
                     bgGradient: "linear(to-l, #7928CA, #FF0080)",
@@ -47,13 +60,14 @@ const RecentEpisodeCard = ({
                 shadow={"none"}
                 rounded={"2xl"}
                 p={0}
-                minW={{ base: "140px", lg: "220px" }}
+                minW={{ base: "140px", lg: "240px" }}
                 _dark={{ bg: "gray-700" }}
             >
                 <CardBody p={0}>
                     <Box>
-                        <AspectRatio position={"relative"} ratio={2 / 3}>
+                        <AspectRatio position={"relative"} ratio={2/ 3}>
                             <Image
+                                objectFit={'fill'}
                                 src={image}
                                 alt={id}
                                 borderRadius="2xl"
@@ -90,7 +104,7 @@ const RecentEpisodeCard = ({
                     </Stack>
                 </CardBody>
             </Card></Link>
-        ) : (<p></p>))
+        ) )
 
 };
 

@@ -1,26 +1,30 @@
 import axios from "axios";
+import { Anime, RecentAnime } from "../types/interface";
 
-const url = import.meta.env.VITE_API_KEY
+const url = "https://mikiflix-api.vercel.app/meta/anilist/"
 
 async function fetchAnimeData(apiUrl: string, type: string) {
   try {
-    const response = await axios.get(apiUrl);
+
+    const response = await fetch(apiUrl);
+
+    const data = await response.json()
     if (type != 'info') {
-      return response.data['results'];
+      return data;
     } else {
-      return response.data;
+      return data.data;
     }
   } catch (error) {
     throw error;
   }
 }
 
-export async function getRecentAnime() {
-  const apiUrl = url + 'recent-episodes';
+export async function getRecentAnime(): Promise<RecentAnime[]>{
+  const apiUrl = url + 'recent-episode';
   return await fetchAnimeData(apiUrl, 'general');
 }
 
-export async function getPopularAnime() {
+export async function getPopularAnime() : Promise<Anime[]> {
   const apiUrl = url + 'popular';
   return await fetchAnimeData(apiUrl, 'general');
 }

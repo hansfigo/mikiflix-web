@@ -59,7 +59,7 @@ const MyHeader = () => {
         );
     }
 
-    const  MyModal = () => {
+    const MyModal = () => {
         return (
             <Modal isOpen={isOpen} onClose={handleClose}>
                 <ModalOverlay
@@ -72,26 +72,32 @@ const MyHeader = () => {
                     _dark={{ bg: 'rgba(0, 0, 0, 0.8)' }} maxW={{ base: '300px', md: '540px' }} >
                     <SearchBarModal />
                     <Flex maxH="80vh" flexDir={'column'} gap={3} overflowY={'scroll'}>
-                        {loading ?
+                        {loading ? (
                             <Flex justifyContent={'center'}>
                                 <CircularProgress color={'blackAlpha.800'} />
-                            </Flex> :
-                            searchResult?.map((result) => (
-                                <>
-                                    <RLink onClick={onClose} to={`/anime/${result.id}`}>
-                                        <Flex gap={3} px={4} py={2}>
-                                            <Image src={result.image} alt={result.title?.romaji} height={100} width={'16'} fit={'cover'} />
-                                            <Flex flexDir={'column'}>
-                                                <Text fontSize={'md'} fontWeight={'semibold'} noOfLines={1}>{result.title?.romaji}</Text>
-                                                <Text fontSize={'sm'} fontWeight={'medium'} noOfLines={1}>{result.releaseDate}</Text>
+                            </Flex>
+                        ) : (
+                            Array.isArray(searchResult) ? ( // Check if searchResult is an array
+                                searchResult.map((result) => (
+                                    <>
+                                        <RLink onClick={onClose} to={`/anime/${result.id}`} key={result.id}>
+                                            <Flex gap={3} px={4} py={2}>
+                                                <Image src={result.image} alt={result.title?.romaji} height={100} width={'16'} fit={'cover'} />
+                                                <Flex flexDir={'column'}>
+                                                    <Text fontSize={'md'} fontWeight={'semibold'} noOfLines={1}>{result.title?.romaji}</Text>
+                                                    <Text fontSize={'sm'} fontWeight={'medium'} noOfLines={1}>{result.releaseDate}</Text>
+                                                </Flex>
                                             </Flex>
-
-                                        </Flex>
-                                        <Divider></Divider>
-                                    </RLink>
-                                </>
-                            ))}
+                                            <Divider></Divider>
+                                        </RLink>
+                                    </>
+                                ))
+                            ) : (
+                                <Text>No search results found.</Text>
+                            )
+                        )}
                     </Flex>
+
 
                 </ModalContent>
             </Modal>
