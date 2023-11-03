@@ -24,7 +24,7 @@ const VideoPlayer = ({ refresh, setHasError }: videoPlayerProps) => {
         async function fetchVideoData() {
             try {
                 setIsLoading(true);
-                const url = `https://api.consumet.org/meta/anilist/watch/${episodeId}`;
+                const url = `https://mikiflix-api.vercel.app/meta/anilist/watch/${episodeId}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 setVideoUrl(data.sources[0].url);
@@ -50,7 +50,8 @@ const VideoPlayer = ({ refresh, setHasError }: videoPlayerProps) => {
     return (
 
         <ReactPlayer
-            url={`${corsProxy[1]}${videoUrl}`}
+            // url={`${corsProxy[1]}${videoUrl}`}
+            url={`${videoUrl}`}
             controls
             width="100%"
             height="auto"

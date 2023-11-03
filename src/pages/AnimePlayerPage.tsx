@@ -1,4 +1,4 @@
-import { Box, Text, Heading, Flex, Button, Image } from "@chakra-ui/react";
+import { Box, Text, Heading, Flex, Button, Image, Avatar } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import VideoPlayer from "../components/AnimePlayerPage/VideoPlayer"
@@ -36,12 +36,16 @@ const AnimePlayer = ({EpisodeTitle} : any) => {
                     <Button fontSize={'xs'} pt={2} colorScheme='blue' variant='link' onClick={() => setRefresh(!refresh)}>Refresh</Button>
                 </Flex>}
 
-                <Heading maxW={'4xl'} fontSize={{ base: '2xl' }} noOfLines={2} pt='4'>{animeInfo?.currentEpisode}</Heading>
+                <Heading maxW={'4xl'} fontSize={{ base: '2xl' }} noOfLines={2} pt='4'>{`${animeInfo?.title?.romaji} Episode ${animeInfo?.currentEpisode}`}</Heading>
             </Box>
             <Link to={`/anime/${animeId}`}>
                 <Flex gap={2}>
-                    <Image src='gibbresh.png' fallbackSrc='https://via.placeholder.com/50' />
-                    <Text>{animeInfo?.title?.romaji}</Text>
+                    <Avatar src={animeInfo?.image} />
+                    <Flex flexDir={'column'}>
+                        <Text fontWeight={'bold'}>{animeInfo?.title?.romaji}</Text>
+                        <Text>{animeInfo?.releaseDate}</Text>
+                        </Flex>
+                    
                 </Flex>
             </Link>
         </Flex>
