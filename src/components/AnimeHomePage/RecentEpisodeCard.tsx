@@ -19,9 +19,6 @@ const RecentEpisodeCard = ({
     episodeNumber,
     id,
 }: Anime) => {
-
-    console.log(title);
-
     const [animeInfo, setAnimeInfo] = useState<AnimeInfo>();
     const [episodeId, setEpisodeId] = useState<string>();
     const [isHaveEpisode, setHaveEpisode] = useState<boolean>(true);
@@ -39,7 +36,6 @@ const RecentEpisodeCard = ({
                     setHaveEpisode(false);
                 }
             } catch (error) {
-                // Handle the error, e.g., display an error message or log it.
                 console.error("Error fetching anime data:", error);
             }
         };

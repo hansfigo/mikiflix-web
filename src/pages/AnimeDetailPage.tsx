@@ -16,23 +16,24 @@ const AnimeDetailPage = () => {
             const fetchData = async () => {
                 console.log("Start");
                 setIsLoading(true);
-                let detail = await getDetailAnime(animeId)
-                console.log("DETAIL", detail);
-                setAnimeDetail(detail);
-                setIsLoading(false);
+                try {
+                    let detail = await getDetailAnime(animeId)
+                    console.log("DETAIL", detail);
+                    setAnimeDetail(detail);
+                    setIsLoading(false);
+                } catch (error) {
+                    console.log("ERROR:", error);
+                }
+               
             }
 
             fetchData()
-
-
-
         }, [animeId]
 
     )
 
     return (
         animeDetail ? <Flex p={4} flexDir={{ base: 'column', md: 'row' }} gap={12}>
-
             {isLoading ? <Text>Loading</Text> : <>
                 <Image rounded={'lg'} boxSize={{ base: 'sm', md: 'lg' }} objectFit='cover' src={animeDetail!.image} />
                 <Flex flexDir={{ base: 'column', md: 'column' }} gap={5}>

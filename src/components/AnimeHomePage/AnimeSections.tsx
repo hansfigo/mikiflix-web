@@ -23,8 +23,6 @@ const CardSkeleton: React.FC = () => {
 
 const AnimeSection: React.FC<AnimeSection> = ({ title, isLoading, section, cardType }: AnimeSection) => {
 
-    console.log("SECTION: "+cardType, section);
-    
     const scrollRef = useRef<HTMLInputElement>(null);
 
     const handleScrollButton = (direction: string) => {

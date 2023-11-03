@@ -9,18 +9,15 @@ async function fetchAnimeData(apiUrl: string, type: string) {
     const response = await fetch(apiUrl);
 
     const data = await response.json()
-    if (type != 'info') {
-      return data;
-    } else {
-      return data.data;
-    }
+    
+    return data
   } catch (error) {
     throw error;
   }
 }
 
 export async function getRecentAnime(): Promise<RecentAnime[]>{
-  const apiUrl = url + 'recent-episode';
+  const apiUrl = url + 'recent-episodes';
   return await fetchAnimeData(apiUrl, 'general');
 }
 
@@ -31,8 +28,13 @@ export async function getPopularAnime() : Promise<Anime[]> {
 
 export async function getDetailAnime(animeId: string | undefined) {
   const apiUrl = url + 'info/' + animeId;
-  const res = await fetchAnimeData(apiUrl, 'info')
-  console.log("API",res);
+  try {
+    const res = await fetchAnimeData(apiUrl, 'info')
+    console.log("API",res);
+  } catch (error) {
+    console.log("error : ",error);
+  }
+
   return await fetchAnimeData(apiUrl, 'info');
 }
 export async function searchAnime(querry: string | undefined) {

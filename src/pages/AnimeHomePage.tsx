@@ -20,7 +20,6 @@ const AnimeHomePage = () => {
             setIsloading(true);
             try {
                 const data = await req;
-
                 tes == 'recent' ? setRecentAnime(data.results) : setPopularAnime(data.results);
             } catch (error) {
                 console.log('Error')
@@ -31,10 +30,6 @@ const AnimeHomePage = () => {
         };
         fetchData(getRecentAnime(), 'recent');
         fetchData(getPopularAnime(), 'popular');
-
-        console.log("Popular", popularAnime);
-        
-
     }, []);
 
 
