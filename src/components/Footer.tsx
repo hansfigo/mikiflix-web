@@ -4,7 +4,7 @@ import logo from '/sayaka.png';
 
 const MyFooter = () => {
     return (
-        <Flex pos={'relative'} flexDir={'column'} w={'full'} alignItems={'center'} shadow="md">
+        <Flex pos={'relative'} flexDir={'column'} w={'full'} alignItems={'center'} shadow="md" py={12}>
             <Image visibility={{base: 'inherit', md: 'hidden', xl : 'hidden'}} pos={'absolute'} transform="scaleX(-1)" bottom={-28} left={'-160px'} right={0} h={'340px'} src={logo}></Image>
             <Text fontSize={{ base: 'sm', md: 'md' }} fontWeight={'light'} >Made by FigoMager 🌊</Text>
             <Text fontSize={{ base: 'sm', md: 'md' }} fontWeight={'light'} >Powered by consumet API</Text>

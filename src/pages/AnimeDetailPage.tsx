@@ -1,9 +1,9 @@
-import { AspectRatio, Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getDetailAnime } from "../services/ApiServices"
 import { type AnimeInfo } from "../types/interface"
-
+import { Spinner } from '@chakra-ui/react'
 
 const AnimeDetailPage = () => {
     const { animeId } = useParams();
@@ -24,7 +24,7 @@ const AnimeDetailPage = () => {
                 } catch (error) {
                     console.log("ERROR:", error);
                 }
-               
+
             }
 
             fetchData()
@@ -34,7 +34,7 @@ const AnimeDetailPage = () => {
 
     return (
         animeDetail ? <Flex p={4} flexDir={{ base: 'column', md: 'row' }} gap={12}>
-            {isLoading ? <Text>Loading</Text> : <>
+            {isLoading ? <div className="flex justify-center items-center w-full h-[60vh]"> <Spinner size='xl' thickness='6px' /> </div> : <>
                 <Image rounded={'lg'} boxSize={{ base: 'sm', md: 'lg' }} objectFit='cover' src={animeDetail!.image} />
                 <Flex flexDir={{ base: 'column', md: 'column' }} gap={5}>
                     <Heading>
@@ -62,11 +62,8 @@ const AnimeDetailPage = () => {
                             )
                         }).reverse()}
                     </Flex>
-
-
                 </Flex></>}
-
-        </Flex> : <p></p> )
+        </Flex> : <div className="flex justify-center items-center w-full h-[60vh]"> <Spinner size='xl' thickness='6px' /> </div>)
 
 }
 export default AnimeDetailPage;
