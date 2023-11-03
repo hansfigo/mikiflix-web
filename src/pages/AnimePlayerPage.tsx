@@ -26,36 +26,39 @@ const AnimePlayer = ({ EpisodeTitle }: any) => {
     }, [])
 
     return (
-        <Flex flexDir={{ base: 'column' }} gap={4}>
-            <Box>
-                <Box maxW={'4xl'}>
-                    <VideoPlayer setHasError={setHasError} refresh={refresh} />
+        <Flex>
+            <Flex flex={1} flexDir={{ base: 'column' }} gap={4}>
+                <Box>
+                    <Box maxW={'4xl'}>
+                        <VideoPlayer setHasError={setHasError} refresh={refresh} />
+                    </Box>
+                    {hasError && <Flex w={'full'} justifyContent={{ base: 'end', md: 'start' }} alignItems={'baseline'} gap={2} fontSize={'xs'}>
+                        <Text>Video Error ? </Text>
+                        <Button fontSize={'xs'} pt={2} colorScheme='blue' variant='link' onClick={() => setRefresh(!refresh)}>Refresh</Button>
+                    </Flex>}
+
                 </Box>
-                {hasError && <Flex w={'full'} justifyContent={{ base: 'end', md: 'start' }} alignItems={'baseline'} gap={2} fontSize={'xs'}>
-                    <Text>Video Error ? </Text>
-                    <Button fontSize={'xs'} pt={2} colorScheme='blue' variant='link' onClick={() => setRefresh(!refresh)}>Refresh</Button>
-                </Flex>}
-
-            </Box>
-            {animeInfo ? <Link to={`/anime/${animeId}`}>
-                <Heading maxW={'4xl'} fontSize={{ base: '2xl' }} noOfLines={2} mb={4} pt='4'>{`${animeInfo?.title?.romaji} Episode ${animeInfo?.currentEpisode}`}</Heading>
-                <Flex gap={2}>
-                    <Avatar src={animeInfo?.image} />
-                    <Flex flexDir={'column'}>
-                        <Text fontWeight={'bold'}>{animeInfo?.title?.romaji}</Text>
-                        <Text>{animeInfo?.releaseDate}</Text>
+                {animeInfo ? <Link to={`/anime/${animeId}`}>
+                    <Heading maxW={'4xl'} fontSize={{ base: '2xl' }} noOfLines={2} mb={4} pt='4'>{`${animeInfo?.title?.romaji} Episode ${animeInfo?.currentEpisode}`}</Heading>
+                    <Flex gap={2}>
+                        <Avatar src={animeInfo?.image} />
+                        <Flex flexDir={'column'}>
+                            <Text fontWeight={'bold'}>{animeInfo?.title?.romaji}</Text>
+                            <Text>{animeInfo?.releaseDate}</Text>
+                        </Flex>
                     </Flex>
-                </Flex>
-            </Link> :
-                <Stack>
-                    <Skeleton height='28px' w={"56"}/>
-                    <Skeleton height='40px' w={32} />
-                </Stack>
-             
-            }
-
+                </Link> :
+                    <Stack>
+                        <Skeleton height='28px' w={"56"} />
+                        <Skeleton height='40px' w={32} />
+                    </Stack>
+                }
+            </Flex>
+            <div className="hidden xl:flex flex-col w-[30%] h-[60ch] justify-center items-center">
+                <img className="grayscale w-72 opacity-40" src="https://cdn-icons-png.flaticon.com/512/1887/1887098.png" alt="" />
+                <p className="font-semibold text-xl text-gray-400">Episode List Under Construction</p>
+            </div>
         </Flex>
-
     )
 }
 
